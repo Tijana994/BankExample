@@ -1,20 +1,17 @@
 package bank;
 
-import annotation.creators.CreateComplaintBasedOnDataAnnotation;
-import annotation.enums.ComplaintBasedOnDataType;
-import aop.test.AOPTest;
-import aop.test.Complaint;
-import bank.models.Bank;
+/*import annotation.creators.CreateComplaintBasedOnDataAnnotation;
+import annotation.enums.ComplaintBasedOnDataType;*/
+import bank.models.*;
 
 public class BankProject {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BankProject bankProject = new BankProject();
-		AOPTest test = new AOPTest();
-		AOPTest.main(null);
 		Bank bank = new Bank();
 		bank.createCity("Novi Sad");
+		bank.collectingDocuments(1);
 		//var c = new Complaint();
 		//c.CreateDenial();
 		//c.CreateWithDraw();
@@ -23,7 +20,7 @@ public class BankProject {
 		System.out.println("End");
 	}
 	
-	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION)
+	//@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION)
 	public Complaint createComplaintOnData()
 	{
 		var complaint = new Complaint();

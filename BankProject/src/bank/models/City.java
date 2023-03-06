@@ -1,7 +1,7 @@
 package bank.models;
-import annotation.LocationAnnotation;
+//import annotation.LocationAnnotation;
 
-@LocationAnnotation(id = "name")
+//@LocationAnnotation(id = "name")
 public class City {
 
 	private String name;

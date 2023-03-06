@@ -2,12 +2,12 @@ package bank.models;
 
 import java.util.Date;
 
-import annotation.ComplaintAnnotation;
+/*import annotation.ComplaintAnnotation;
 import annotation.creators.CreateDenialAnnotation;
 import annotation.creators.CreateWithdrawAnnotation;
-import annotation.enums.CreatedObjectLocation;
+import annotation.enums.CreatedObjectLocation;*/
 
-@ComplaintAnnotation(id="name", reason = "reason", when = "time")
+//@ComplaintAnnotation(id="name", reason = "reason", when = "time")
 public class Complaint {
 
 	private String name;
@@ -15,7 +15,7 @@ public class Complaint {
 	private Date time;
 	private Withdraw withdraw;
 	
-	@CreateDenialAnnotation()
+	//@CreateDenialAnnotation()
 	public Denial CreateDenial()
 	{
 		var denial = new Denial();
@@ -25,13 +25,13 @@ public class Complaint {
 		return denial;
 	}
 	
-	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw")
+	//@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw")
 	public void CreateWithDraw()
 	{
 		withdraw = new Withdraw();
 	}
 	
-	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Parameter, name = "withdraw")
+	//@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Parameter, name = "withdraw")
 	public void CreateWithDraw(Withdraw withdraw)
 	{
 		withdraw.setName("Testic");
