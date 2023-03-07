@@ -1,7 +1,5 @@
 package bank;
 
-/*import annotation.creators.CreateComplaintBasedOnDataAnnotation;
-import annotation.enums.ComplaintBasedOnDataType;*/
 import bank.models.*;
 
 public class BankProject {
@@ -12,11 +10,11 @@ public class BankProject {
 		Bank bank = new Bank();
 		bank.createCity("Novi Sad");
 		bank.collectingDocuments(1);
-		//var c = new Complaint();
-		//c.CreateDenial();
-		//c.CreateWithDraw();
-		//c.CreateWithDraw(new Withdraw());
-		bankProject.createComplaintOnData();
+		/*var c = new Complaint();
+		c.CreateDenial();
+		c.CreateWithDraw();
+		c.CreateWithDraw(new Withdraw());
+		bankProject.createComplaintOnData();*/
 		System.out.println("End");
 	}
 	
