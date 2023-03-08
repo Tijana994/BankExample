@@ -1,7 +1,8 @@
 package bank.models;
-//import annotation.LocationAnnotation;
 
-//@LocationAnnotation(id = "name")
+import com.security.model.validation.annotations.LocationAnnotation;
+
+@LocationAnnotation(id = "name")
 public class City {
 
 	private String name;

@@ -4,17 +4,23 @@ import bank.models.*;
 
 public class BankProject {
 
+	private Bank bank;
+	
+	public BankProject()
+	{
+		bank = new Bank();
+	}
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		BankProject bankProject = new BankProject();
-		Bank bank = new Bank();
-		bank.createCity("Novi Sad");
-		bank.collectingDocuments(1);
-		/*var c = new Complaint();
-		c.CreateDenial();
-		c.CreateWithDraw();
-		c.CreateWithDraw(new Withdraw());
-		bankProject.createComplaintOnData();*/
+		bankProject.bank.createCity("Novi Sad");
+		//bankProject.bank.collectingDocuments(1);
+		//bankProject.bank.createUser("Tommica");
+		//var c = new Complaint();
+		//c.CreateDenial();
+		//c.CreateWithDraw();
+		//c.CreateWithDraw(new Withdraw());
+		//bankProject.createComplaintOnData();
 		System.out.println("End");
 	}
 	

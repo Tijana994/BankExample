@@ -2,9 +2,9 @@ package bank.models;
 
 import java.util.Date;
 
-//import annotation.WithdrawAnnotation;
+import com.security.model.validation.annotations.WithdrawAnnotation;
 
-//@WithdrawAnnotation(id="name", when = "time", reason = "reason")
+@WithdrawAnnotation(id="name", when = "time", reason = "reason")
 public class Withdraw {
 
 	private String name;

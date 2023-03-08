@@ -6,13 +6,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
+import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
+import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 import com.security.model.validation.annotations.enums.tobedeleted.Action;
+import com.security.model.validation.annotations.enums.tobedeleted.LocationType;
 import com.security.model.validation.annotations.enums.tobedeleted.TimePreposition;
 
 public class Bank {
 
-	//@CreateLocationAnnotation(locationType = LocationType.REGION)
+	@CreateLocationAnnotation(locationType = LocationType.REGION)
 	public City createCity(String name)
 	{
 		var l =  new City();
@@ -35,6 +38,12 @@ public class Bank {
 		var log = new Log();
 		log.setName("something");
 		return log;
+	}
+	
+	@CreatePrincipalAnnotation()
+	public User createUser(String username)
+	{
+		return new User(username);
 	}
 	
 	public String admin;
