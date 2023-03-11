@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
+import com.security.model.validation.annotations.creators.CreateConsentAnnotation;
+import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
 import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 import com.security.model.validation.annotations.enums.tobedeleted.Action;
+import com.security.model.validation.annotations.enums.tobedeleted.ConsentFormat;
+import com.security.model.validation.annotations.enums.tobedeleted.ConsentType;
+import com.security.model.validation.annotations.enums.tobedeleted.DocumentType;
 import com.security.model.validation.annotations.enums.tobedeleted.LocationType;
 import com.security.model.validation.annotations.enums.tobedeleted.TimePreposition;
 
@@ -37,6 +42,8 @@ public class Bank {
 		start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var log = new Log();
 		log.setName("something");
+		createChildCustodyDocument("Child custody test");
+		createConsentDocument("consent for Tommo");
 		return log;
 	}
 	
@@ -44,6 +51,26 @@ public class Bank {
 	public User createUser(String username)
 	{
 		return new User(username);
+	}
+	
+	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
+	private Document createChildCustodyDocument(String name)
+	{
+		Document document = new Document();
+		document.setName(name);
+		document.setLocation("somewhere");
+		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		return document;
+	}
+	
+	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
+	private Document createConsentDocument(String name)
+	{
+		Document document = new Document();
+		document.setName(name);
+		document.setLocation("somewhere");
+		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		return document;
 	}
 	
 	public String admin;
