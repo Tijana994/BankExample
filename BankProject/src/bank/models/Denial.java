@@ -2,9 +2,9 @@ package bank.models;
 
 import java.util.Date;
 
-//import annotation.DenialAnnotation;
+import com.security.model.validation.annotations.DenialAnnotation;
 
-//@DenialAnnotation(id = "name", when="date", reason="reason")
+@DenialAnnotation(id = "name", when="date", reason="reason")
 public class Denial {
 
 	private String name;

@@ -17,19 +17,10 @@ public class BankProject {
 		bankProject.bank.collectingDocuments(1);
 		bankProject.bank.createUser("Tommica");
 		var c = new Complaint();
-		//c.CreateDenial();
+		c.CreateDenial();
 		c.CreateWithDraw();
 		c.CreateWithDraw(new Withdraw());
-		//bankProject.createComplaintOnData();
+		bankProject.bank.createComplaintOnData();
 		System.out.println("End");
-	}
-	
-	//@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION)
-	public Complaint createComplaintOnData()
-	{
-		var complaint = new Complaint();
-		complaint.setName("Name text");
-		complaint.setReason("Reason text");
-		return complaint;
 	}
 }

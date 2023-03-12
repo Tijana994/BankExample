@@ -2,10 +2,12 @@ package bank.models;
 
 import java.util.Date;
 
+import com.security.model.validation.annotations.ComplaintAnnotation;
+import com.security.model.validation.annotations.creators.CreateDenialAnnotation;
 import com.security.model.validation.annotations.creators.CreateWithdrawAnnotation;
 import com.security.model.validation.annotations.enums.CreatedObjectLocation;
 
-//@ComplaintAnnotation(id="name", reason = "reason", when = "time")
+@ComplaintAnnotation(id="name", reason = "reason", when = "time")
 public class Complaint {
 
 	private String name;
@@ -13,7 +15,7 @@ public class Complaint {
 	private Date time;
 	private Withdraw withdraw;
 	
-	//@CreateDenialAnnotation()
+	@CreateDenialAnnotation()
 	public Denial CreateDenial()
 	{
 		var denial = new Denial();

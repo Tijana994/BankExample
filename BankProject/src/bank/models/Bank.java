@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
+import com.security.model.validation.annotations.creators.CreateComplaintBasedOnDataAnnotation;
 import com.security.model.validation.annotations.creators.CreateConsentAnnotation;
 import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
 import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 import com.security.model.validation.annotations.enums.tobedeleted.Action;
+import com.security.model.validation.annotations.enums.tobedeleted.ComplaintBasedOnDataType;
 import com.security.model.validation.annotations.enums.tobedeleted.ConsentFormat;
 import com.security.model.validation.annotations.enums.tobedeleted.ConsentType;
 import com.security.model.validation.annotations.enums.tobedeleted.DocumentType;
@@ -71,6 +73,15 @@ public class Bank {
 		document.setLocation("somewhere");
 		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
 		return document;
+	}
+	
+	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION)
+	public Complaint createComplaintOnData()
+	{
+		var complaint = new Complaint();
+		complaint.setName("Name text");
+		complaint.setReason("Reason text");
+		return complaint;
 	}
 	
 	public String admin;
