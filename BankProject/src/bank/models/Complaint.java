@@ -6,6 +6,7 @@ import com.security.model.validation.annotations.ComplaintAnnotation;
 import com.security.model.validation.annotations.creators.CreateDenialAnnotation;
 import com.security.model.validation.annotations.creators.CreateWithdrawAnnotation;
 import com.security.model.validation.annotations.enums.CreatedObjectLocation;
+import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
 
 @ComplaintAnnotation(id="name", reason = "reason", when = "time")
 public class Complaint {
@@ -14,6 +15,7 @@ public class Complaint {
 	private String reason;
 	private Date time;
 	private Withdraw withdraw;
+	private Document consent;
 	
 	@CreateDenialAnnotation()
 	public Denial CreateDenial()
@@ -25,7 +27,7 @@ public class Complaint {
 		return denial;
 	}
 	
-	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw")
+	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw", consent = "consent", parametersLocation = ParametersObjectsLocation.Property)
 	public void CreateWithDraw()
 	{
 		withdraw = new Withdraw();
@@ -63,5 +65,13 @@ public class Complaint {
 
 	public Withdraw getWithdraw() {
 		return withdraw;
+	}
+
+	public Document getConsent() {
+		return consent;
+	}
+
+	public void setConsent(Document consent) {
+		this.consent = consent;
 	}
 }

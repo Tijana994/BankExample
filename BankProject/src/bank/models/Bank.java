@@ -66,7 +66,7 @@ public class Bank {
 	}
 	
 	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
-	private Document createConsentDocument(String name)
+	public Document createConsentDocument(String name)
 	{
 		Document document = new Document();
 		document.setName(name);
