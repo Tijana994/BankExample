@@ -12,13 +12,14 @@ import com.security.model.validation.annotations.creators.CreateDocumentAnnotati
 import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
-import com.security.model.validation.annotations.enums.tobedeleted.Action;
-import com.security.model.validation.annotations.enums.tobedeleted.ComplaintBasedOnDataType;
-import com.security.model.validation.annotations.enums.tobedeleted.ConsentFormat;
-import com.security.model.validation.annotations.enums.tobedeleted.ConsentType;
-import com.security.model.validation.annotations.enums.tobedeleted.DocumentType;
-import com.security.model.validation.annotations.enums.tobedeleted.LocationType;
-import com.security.model.validation.annotations.enums.tobedeleted.TimePreposition;
+
+import privacyModel.Action;
+import privacyModel.ComplaintBasedOnDataType;
+import privacyModel.ConsentFormat;
+import privacyModel.ConsentType;
+import privacyModel.DocumentType;
+import privacyModel.LocationType;
+import privacyModel.TimePreposition;
 
 public class Bank {
 
