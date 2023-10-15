@@ -18,7 +18,7 @@ public class BankProject {
 		bankProject.bank.createUser("Tommica");*/
 		var c = new Complaint();
 		//c.CreateDenial();
-		c.setConsent(bankProject.bank.createConsentDocument("consent test"));
+		//c.setConsent(bankProject.bank.createConsentDocument("consent test"));
 		c.CreateWithDraw();
 		/*c.CreateWithDraw(new Withdraw());
 		bankProject.bank.createComplaintOnData();*/

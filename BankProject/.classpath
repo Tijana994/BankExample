@@ -6,11 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/aspectjrt.jar"/>
-	<classpathentry kind="lib" path="lib/aspectjtools.jar"/>
-	<classpathentry kind="lib" path="lib/aspectjweaver.jar"/>
 	<classpathentry kind="lib" path="lib/temda.jar"/>
 	<classpathentry kind="lib" path="lib/privacyModel.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.emf.common_2.29.0.v20230810-0713.jar"/>
+	<classpathentry kind="lib" path="lib/java21/aspectjrt-1.9.20.1.jar"/>
+	<classpathentry kind="lib" path="lib/java21/aspectjtools-1.9.20.1.jar"/>
+	<classpathentry kind="lib" path="lib/java21/aspectjweaver-1.9.20.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
