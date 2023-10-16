@@ -1,6 +1,7 @@
 package bank;
 
 import bank.models.*;
+import utility.ProjectConfiguration;
 
 public class BankProject {
 
@@ -8,6 +9,7 @@ public class BankProject {
 	
 	public BankProject()
 	{
+		var config = new ProjectConfiguration.Configuration();
 		bank = new Bank();
 	}
 	
