@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<privacyModel:PrivacyPolicy
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:privacyModel="http://privacymodel"
+    name="City hospital policy"
+    owner="//@allPrincipals.0">
+  <allPrincipals
+      name="City hospital"
+      inhabits="//@locations.1"/>
+  <allPrincipals
+      name="Pera"
+      type="NaturalPerson"
+      age="20"/>
+  <locations
+      name="Italy"
+      isEUMember="true"
+      type="Country"
+      subLocations="//@locations.1"
+      legalAgeLimit="18"/>
+  <locations
+      name="Milano"
+      isEUMember="true"
+      type="Region"
+      legalAgeLimit="18"/>
+  <defaultProtectionControls>Encryption</defaultProtectionControls>
+  <configurationManager>
+    <dataSources>PubliclyAccessibleSources</dataSources>
+    <dataSources>Identity document</dataSources>
+    <dataSources>Internal</dataSources>
+    <protectionControlMethods>OriginalData</protectionControlMethods>
+    <protectionControlMethods>Pseudonymisation</protectionControlMethods>
+    <protectionControlMethods>Encryption</protectionControlMethods>
+  </configurationManager>
+  <privacyPolicyHelper/>
+</privacyModel:PrivacyPolicy>

@@ -12,6 +12,7 @@ import com.security.model.validation.annotations.creators.CreateDocumentAnnotati
 import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
+import com.security.model.validation.annotations.enums.Constants;
 
 import privacyModel.Action;
 import privacyModel.ComplaintBasedOnDataType;
@@ -31,22 +32,23 @@ public class Bank {
 		return l;
 	}
 
-	@CreatePolicyStatementAnnotation(who = "admin", whose ="user", why ="purpose", when = "start,end", actions = {Action.STORE, Action.COLLECTING}, datas = {})
+	@CreatePolicyStatementAnnotation(who = "admin", whose ="user", whom = Constants.Empty, why ="purpose", when = "start,end", actions = {Action.STORE, Action.COLLECTING}, datas = {})
 	public Log collectingDocuments(int i)
 	{
-		admin = "Tommo" + i;
+		admin = "City hospital";
 		user = "Pera" + i;
-		purpose = new Purpose();
+		var log = new Log();
+		log.setName("something");
+		/*purpose = new Purpose();
 		purpose.Text = "Neki random tekst";
 		purpose.SubPurposes = new ArrayList<Purpose>();
 		var sub = new Purpose();
 		sub.Text = "whatever";
 		purpose.SubPurposes.add(sub);
 		start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		var log = new Log();
-		log.setName("something");
-		createChildCustodyDocument("Child custody test");
-		createConsentDocument("consent for Tommo");
+		*/
+		//createChildCustodyDocument("Child custody test");
+		//createConsentDocument("consent for Tommo");
 		return log;
 	}
 	
