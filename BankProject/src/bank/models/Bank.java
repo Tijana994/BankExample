@@ -20,15 +20,18 @@ import privacyModel.ConsentFormat;
 import privacyModel.ConsentType;
 import privacyModel.DocumentType;
 import privacyModel.LocationType;
+import privacyModel.PrincipalScope;
+import privacyModel.PrincipalType;
 import privacyModel.TimePreposition;
 
 public class Bank {
 
 	@CreateLocationAnnotation(locationType = LocationType.REGION)
-	public City createCity(String name)
+	public City createCity(String name, String parentId)
 	{
 		var l =  new City();
 		l.setName(name);
+		l.setParentId(parentId);
 		return l;
 	}
 
@@ -52,7 +55,7 @@ public class Bank {
 		return log;
 	}
 	
-	@CreatePrincipalAnnotation()
+	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON)
 	public User createUser(String username)
 	{
 		return new User(username);
