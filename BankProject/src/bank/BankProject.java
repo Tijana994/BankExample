@@ -15,14 +15,14 @@ public class BankProject {
 	
 	public static void main(String[] args) {
 		BankProject bankProject = new BankProject();
-		bankProject.bank.collectingDocuments(1);
+		var complaint = bankProject.bank.createComplaintOnAction();
+		complaint.CreateDenial();
+		complaint.setConsent(bankProject.bank.createConsentDocument("consent test"));
+		/*bankProject.bank.collectingDocuments(1);
 		bankProject.bank.createCity("Novi Sad", "Italy");
-		bankProject.bank.createUser("Tommica");
-		//var c = new Complaint();
-		//c.CreateDenial();
-		//c.setConsent(bankProject.bank.createConsentDocument("consent test"));
-		//c.CreateWithDraw();
-		/*c.CreateWithDraw(new Withdraw());
+		bankProject.bank.createUser("Tommica");*/
+		//complaint.CreateWithDraw();
+		/*complaint.CreateWithDraw(new Withdraw());
 		bankProject.bank.createComplaintOnData();*/
 		System.out.println("End");
 	}
