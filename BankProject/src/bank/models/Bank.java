@@ -43,14 +43,13 @@ public class Bank {
 		user = "Pera" + i;
 		var log = new Log();
 		log.setName("something");
-		/*purpose = new Purpose();
+		purpose = new Purpose();
 		purpose.Text = "Neki random tekst";
 		purpose.SubPurposes = new ArrayList<Purpose>();
 		var sub = new Purpose();
 		sub.Text = "whatever";
 		purpose.SubPurposes.add(sub);
 		start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		*/
 		//createChildCustodyDocument("Child custody test");
 		//createConsentDocument("consent for Tommo");
 		return log;
@@ -58,8 +57,9 @@ public class Bank {
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON)
 	public User createUser(String username)
-	{
-		return new User(username);
+	{ 
+		var date = new Date(2019,10,10);
+		return new User(username, date);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
