@@ -36,7 +36,7 @@ public class Bank {
 		return l;
 	}
 
-	@CreatePolicyStatementAnnotation(who = "admin", whose ="user", whom = Constants.Empty, why ="purpose", when = "start,end", actions = {Action.STORE, Action.COLLECTING}, datas = {})
+	@CreatePolicyStatementAnnotation(who = "admin", whose ="user", whom = Constants.Empty, why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {})
 	public Log collectingDocuments(int i)
 	{
 		admin = "City hospital";
