@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnActionAnnotation;
@@ -59,7 +60,11 @@ public class Bank {
 	public User createUser(String username)
 	{ 
 		var date = new Date(2019,10,10);
-		return new User(username, date);
+		var kids = new ArrayList<String>();
+		kids.add("Tommo");
+		kids.add("vepar");
+		kids.add("Pera");
+		return new User(username, date, kids);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)

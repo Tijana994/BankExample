@@ -12,6 +12,8 @@
       name="Pera"
       type="NaturalPerson"
       age="20"/>
+  <allPrincipals
+      name="Tommo"/>
   <locations
       name="Italy"
       isEUMember="true"

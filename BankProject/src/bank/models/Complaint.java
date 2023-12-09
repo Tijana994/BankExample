@@ -16,6 +16,7 @@ public class Complaint {
 	private Date time;
 	private Withdraw withdraw;
 	private Document consent;
+	private String consentId;
 	
 	@CreateDenialAnnotation()
 	public Denial CreateDenial()
@@ -33,9 +34,16 @@ public class Complaint {
 		withdraw = new Withdraw();
 	}
 	
-	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Parameter, name = "withdraw")
+	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw", consent = "consent", parametersLocation = ParametersObjectsLocation.Parameter)
+	public void CreateWithDraw(Document consent)
+	{
+		withdraw = new Withdraw();
+	}
+	
+	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Parameter, name = "withdraw", consentId = "consentId")
 	public void CreateWithDraw(Withdraw withdraw)
 	{
+	    setConsentId("1234");
 		withdraw.setName("Testic");
 	}
 
@@ -73,5 +81,13 @@ public class Complaint {
 
 	public void setConsent(Document consent) {
 		this.consent = consent;
+	}
+
+	public String getConsentId() {
+		return consentId;
+	}
+
+	public void setConsentId(String consentId) {
+		this.consentId = consentId;
 	}
 }

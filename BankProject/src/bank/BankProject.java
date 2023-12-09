@@ -15,15 +15,16 @@ public class BankProject {
 	
 	public static void main(String[] args) {
 		BankProject bankProject = new BankProject();
-		var complaint = bankProject.bank.createComplaintOnAction();
-		complaint.CreateDenial();
-		complaint.setConsent(bankProject.bank.createConsentDocument("consent test"));
-		bankProject.bank.collectingDocuments(1);
-		//bankProject.bank.createCity("Novi Sad", "Italy");
 		bankProject.bank.createUser("Tommica");
-		//complaint.CreateWithDraw();
-		/*complaint.CreateWithDraw(new Withdraw());
-		bankProject.bank.createComplaintOnData();*/
+		var complaint = bankProject.bank.createComplaintOnAction();
+		/*complaint.CreateDenial();*/
+		var consent = bankProject.bank.createConsentDocument("consent test");
+		/*complaint.setConsent(consent);
+		bankProject.bank.collectingDocuments(1);
+		bankProject.bank.createCity("Novi Sad", "Italy");*/
+		complaint.CreateWithDraw(consent);
+		//complaint.CreateWithDraw(new Withdraw());
+		/*bankProject.bank.createComplaintOnData();*/
 		System.out.println("End");
 	}
 }
