@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnActionAnnotation;
@@ -38,12 +37,12 @@ public class Bank {
 	}
 
 	@CreatePolicyStatementAnnotation(who = "admin", whose ="user", whom = Constants.Empty, why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {})
-	public Log collectingDocuments(int i)
+	public Log collectingDocuments()
 	{
-		admin = "City hospital";
-		user = "Pera" + i;
+		admin = "City bank";
+		user = "Pera";
 		var log = new Log();
-		log.setName("something");
+		log.setName("creating documents for " + user);
 		purpose = new Purpose();
 		purpose.Text = "Neki random tekst";
 		purpose.SubPurposes = new ArrayList<Purpose>();
@@ -60,11 +59,18 @@ public class Bank {
 	public User createUser(String username)
 	{ 
 		var date = new Date(2019,10,10);
-		var kids = new ArrayList<String>();
-		kids.add("Tommo");
-		kids.add("vepar");
-		kids.add("Pera");
+		var kids = new ArrayList<User>();
+		kids.add(new User("Tommo", date));
+		kids.add(new User("vepar", date));
+		kids.add(new User("Pera", date));
 		return new User(username, date, kids);
+	}
+	
+	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY)
+	public User createLegalEntity(String username)
+	{ 
+		var date = new Date(2019,10,10);
+		return new User(username, date);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)

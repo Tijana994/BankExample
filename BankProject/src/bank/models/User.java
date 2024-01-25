@@ -5,18 +5,21 @@ import java.util.List;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "rodjendan", childrensIds = "lista")
+@PrincipalAnnotation(id = "username", birthday = "rodjendan", childrens = "lista")
 public class User {
 
 	private String username;
-	private List<String> lista;
+	private List<User> lista;
 	public User(String username){
 		this.setUsername(username);
 	}
-	public User(String username, Date rodjedan, List<String> lista){
+	public User(String username, Date rodjedan, List<User> lista){
+		this(username, rodjedan);
+		this.setLista(lista);
+	}
+	public User(String username, Date rodjedan){
 		this.setUsername(username);
 		this.setRodjedan(rodjedan);
-		this.setLista(lista);
 	}
 	public String getUsername() {
 		return username;
@@ -31,10 +34,10 @@ public class User {
 	public void setRodjedan(Date rodjendan) {
 		this.rodjendan = rodjendan;
 	}
-	public List<String> getLista() {
+	public List<User> getLista() {
 		return lista;
 	}
-	public void setLista(List<String> lista) {
+	public void setLista(List<User> lista) {
 		this.lista = lista;
 	}
 }
