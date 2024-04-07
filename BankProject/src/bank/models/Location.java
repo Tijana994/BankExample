@@ -3,7 +3,7 @@ package bank.models;
 import com.security.model.validation.annotations.LocationAnnotation;
 
 @LocationAnnotation(id = "name", parentId ="parentId")
-public class City {
+public class Location {
 
 	private String name;
 	private String parentId;

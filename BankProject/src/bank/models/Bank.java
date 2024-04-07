@@ -1,6 +1,8 @@
 package bank.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +12,6 @@ import com.security.model.validation.annotations.creators.CreateComplaintBasedOn
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnDataAnnotation;
 import com.security.model.validation.annotations.creators.CreateConsentAnnotation;
 import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
-import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 import com.security.model.validation.annotations.enums.Constants;
@@ -20,57 +21,50 @@ import privacyModel.ComplaintBasedOnDataType;
 import privacyModel.ConsentFormat;
 import privacyModel.ConsentType;
 import privacyModel.DocumentType;
-import privacyModel.LocationType;
 import privacyModel.PrincipalScope;
 import privacyModel.PrincipalType;
 import privacyModel.TimePreposition;
 
 public class Bank {
 
-	@CreateLocationAnnotation(locationType = LocationType.REGION)
-	public City createCity(String name, String parentId)
+	@CreatePolicyStatementAnnotation(who = "admin", whoseId ="userId", whomId = Constants.Empty, 
+			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {}, howConsentId = "consentId")
+	public Log collectingDocuments(User admin, String userId, Date start, Purpose purpose, String consentId)
 	{
-		var l =  new City();
-		l.setName(name);
-		l.setParentId(parentId);
-		return l;
+		var log = new Log();
+		log.setName("creating documents for " + admin.getUsername());
+		this.start = start;
+		//createChildCustodyDocument("Child custody test");
+		return log;
 	}
 
-	@CreatePolicyStatementAnnotation(who = "admin", whose ="user", whom = Constants.Empty, why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {})
-	public Log collectingDocuments()
-	{
-		admin = "City bank";
-		user = "Pera";
-		var log = new Log();
-		log.setName("creating documents for " + user);
-		purpose = new Purpose();
+	public Purpose createPurpose() {
+		var purpose = new Purpose();
 		purpose.Text = "Neki random tekst";
 		purpose.SubPurposes = new ArrayList<Purpose>();
 		var sub = new Purpose();
 		sub.Text = "whatever";
 		purpose.SubPurposes.add(sub);
-		start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		//createChildCustodyDocument("Child custody test");
-		//createConsentDocument("consent for Tommo");
-		return log;
+		return purpose;
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON)
-	public User createUser(String username)
-	{ 
-		var date = new Date(2019,10,10);
-		var kids = new ArrayList<User>();
-		kids.add(new User("Tommo", date));
-		kids.add(new User("vepar", date));
-		kids.add(new User("Pera", date));
-		return new User(username, date, kids);
+	public User createEmployee(String username, LocalDate birthday)
+	{
+		var date = java.util.Date.from(birthday.atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant());
+		return new User(username, date);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY)
-	public User createLegalEntity(String username)
+	public User createLegalEntity(String username, ArrayList<User> employees, Location located)
 	{ 
-		var date = new Date(2019,10,10);
-		return new User(username, date);
+		var localDate = LocalDate.of(2019, 10, 10);
+		var date = java.util.Date.from(localDate.atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant());
+		return new User(username, date, employees, located);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
@@ -111,9 +105,6 @@ public class Bank {
 		return complaint;
 	}
 	
-	public String admin;
-	public String user;
-	public Purpose purpose;
 	@TimeStatementAnnotation(preposition = TimePreposition.AT)
 	public Date start;
 }
