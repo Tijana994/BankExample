@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
+  <policyStatements name="Open account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
+    <why details="Neki random tekst">
+      <subPurposes details="whatever"/>
+    </why>
+    <what>
+      <actions>Store</actions>
+      <actions>Collecting</actions>
+    </what>
+    <how consent="//@allConsents.0"/>
+  </policyStatements>
+  <allPrincipals name="Ned - bank" type="NaturalPerson" birthdate="1990-04-10T00:00:00.000+0200" age="34"/>
+  <allPrincipals name="Patti - bank" type="NaturalPerson" birthdate="1994-04-25T00:00:00.000+0200" age="30"/>
+  <allPrincipals name="Green bank" subPrincipals="//@allPrincipals.0 //@allPrincipals.1" inhabits="//@locations.3"/>
+  <allPrincipals name="Eve" type="NaturalPerson" scope="Out"/>
+  <locations name="Serbia" type="Country" subLocations="//@locations.1"/>
+  <locations name="Novi Sad" type="Region"/>
+  <locations name="Hungary" type="Country" subLocations="//@locations.3"/>
+  <locations name="Budapest" type="Region"/>
+  <configurationManager/>
+  <privacyPolicyHelper/>
+  <allConsents name="Eve consent" startDate="2024-04-18T15:17:17.035+0200" location="somewhere"/>
+</privacyModel:PrivacyPolicy>

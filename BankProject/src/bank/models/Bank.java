@@ -27,12 +27,13 @@ import privacyModel.TimePreposition;
 
 public class Bank {
 
-	@CreatePolicyStatementAnnotation(who = "admin", whoseId ="userId", whomId = Constants.Empty, 
-			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {}, howConsentId = "consentId")
-	public Log collectingDocuments(User admin, String userId, Date start, Purpose purpose, String consentId)
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
+			howConsentId = "consentId")
+	public Log openAccount(User employee, String userId, Date start, Purpose purpose, String consentId)
 	{
 		var log = new Log();
-		log.setName("creating documents for " + admin.getUsername());
+		log.setName("Open account for " + userId);
 		this.start = start;
 		//createChildCustodyDocument("Child custody test");
 		return log;
@@ -48,7 +49,7 @@ public class Bank {
 		return purpose;
 	}
 	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON)
+	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON, shouldSetBirtday = true)
 	public User createEmployee(String username, LocalDate birthday)
 	{
 		var date = java.util.Date.from(birthday.atStartOfDay()
@@ -57,14 +58,16 @@ public class Bank {
 		return new User(username, date);
 	}
 	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY)
+	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON)
+	public User createCustomer(String username)
+	{
+		return new User(username);
+	}
+	
+	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)
 	public User createLegalEntity(String username, ArrayList<User> employees, Location located)
 	{ 
-		var localDate = LocalDate.of(2019, 10, 10);
-		var date = java.util.Date.from(localDate.atStartOfDay()
-			      .atZone(ZoneId.systemDefault())
-			      .toInstant());
-		return new User(username, date, employees, located);
+		return new User(username, employees, located);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)

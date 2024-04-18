@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "rodjendan", childrens = "subUsers", inhabits = "location")
+@PrincipalAnnotation(id = "username", birthday = "birthday", childrens = "subUsers", inhabits = "location")
 public class User {
 
 	private String username;
@@ -15,9 +15,14 @@ public class User {
 	public User(String username){
 		this.setUsername(username);
 	}
-	public User(String username, Date rodjedan, List<User> subUsers, Location location){
-		this(username, rodjedan, subUsers);
+	public User(String username, List<User> subUsers, Location location){
+		this(username,subUsers);
 		this.setLocation(location);
+	}
+	public User(String username, List<User> subUsers){
+		this.setUsername(username);
+		this.setSubUsers(subUsers);
+		
 	}
 	public User(String username, Date rodjedan, List<User> subUsers){
 		this(username, rodjedan);
@@ -25,7 +30,7 @@ public class User {
 	}
 	public User(String username, Date rodjedan){
 		this.setUsername(username);
-		this.setRodjedan(rodjedan);
+		this.setBirthday(rodjedan);
 	}
 	public String getUsername() {
 		return username;
@@ -33,12 +38,12 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	private Date rodjendan;
-	public Date getRodjendan() {
-		return rodjendan;
+	private Date birthday;
+	public Date getBirthday() {
+		return birthday;
 	}
-	public void setRodjedan(Date rodjendan) {
-		this.rodjendan = rodjendan;
+	public void setBirthday(Date rodjendan) {
+		this.birthday = rodjendan;
 	}
 	public List<User> getSubUsers() {
 		return subUsers;

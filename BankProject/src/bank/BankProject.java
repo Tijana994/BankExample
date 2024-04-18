@@ -34,11 +34,11 @@ public class BankProject {
 		var bankUser = bankProject.bank.createLegalEntity("Green bank", employees, city2);
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 
+		var eve = bankProject.bank.createCustomer("Eve");
 		
-		/*var user = bankProject.bank.createUser("Tommica");
 		var start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		var consent = bankProject.bank.createConsentDocument("consent for Tommo");
-		bankProject.bank.collectingDocuments(bankUser, user.getUsername(), start, bankProject.bank.createPurpose(), consent.getName());*/
+		var consent = bankProject.bank.createConsentDocument("Eve consent");
+		bankProject.bank.openAccount(bankUser, eve.getUsername(), start, bankProject.bank.createPurpose(), consent.getName());
 		//var complaint = bankProject.bank.createComplaintOnAction();
 		/*complaint.CreateDenial();*/
 		/*complaint.setConsent(consent);
