@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnActionAnnotation;
@@ -39,13 +40,8 @@ public class Bank {
 		return log;
 	}
 
-	public Purpose createPurpose() {
-		var purpose = new Purpose();
-		purpose.Text = "Neki random tekst";
-		purpose.SubPurposes = new ArrayList<Purpose>();
-		var sub = new Purpose();
-		sub.Text = "whatever";
-		purpose.SubPurposes.add(sub);
+	public Purpose createPurpose(String text, List<Purpose> subpurposes, int reason, int subtype) {
+		var purpose = new Purpose(text, subpurposes,reason,subtype);
 		return purpose;
 	}
 	

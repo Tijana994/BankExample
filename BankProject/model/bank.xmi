@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
   <policyStatements name="Open account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
-    <why details="Neki random tekst">
-      <subPurposes details="whatever"/>
-    </why>
-    <what>
+    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Open account 1"/>
+    <what datas="//@allSharedPrivacyData.0">
       <actions>Store</actions>
       <actions>Collecting</actions>
     </what>
@@ -18,7 +16,20 @@
   <locations name="Novi Sad" type="Region"/>
   <locations name="Hungary" type="Country" subLocations="//@locations.3"/>
   <locations name="Budapest" type="Region"/>
-  <configurationManager/>
+  <defaultProtectionControls>OriginalData</defaultProtectionControls>
+  <configurationManager>
+    <dataSources>PubliclyAccessibleSources</dataSources>
+    <dataSources>Identity document</dataSources>
+    <dataSources>Internal</dataSources>
+    <protectionControlMethods>OriginalData</protectionControlMethods>
+    <protectionControlMethods>Pseudonymisation</protectionControlMethods>
+    <protectionControlMethods>Encryption</protectionControlMethods>
+  </configurationManager>
+  <allDatas name="name" type="General"/>
+  <allDatas name="account number" type="General"/>
+  <allDatas name="identity number"/>
+  <allDatas name="email" type="General"/>
   <privacyPolicyHelper/>
-  <allConsents name="Eve consent" startDate="2024-04-18T15:17:17.035+0200" location="somewhere"/>
+  <allConsents name="Eve consent" startDate="2024-04-20T22:23:55.423+0200" location="somewhere"/>
+  <allSharedPrivacyData name="name" privacydata="//@allDatas.0"/>
 </privacyModel:PrivacyPolicy>

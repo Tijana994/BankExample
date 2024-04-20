@@ -6,7 +6,11 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.emf.common.util.EList;
+
 import bank.models.*;
+import privacyModel.DataType;
+import utility.PrivacyDataFactory.DataFactory;
 import utility.ProjectConfiguration.Configuration;
 
 public class BankProject {
@@ -19,9 +23,9 @@ public class BankProject {
 	}
 	
 	public static void main(String[] args) {
-		Configuration.setXmlPath("model/bank.xmi");
-		Configuration.createDefaultConfiguration();
-		Configuration.setPrivacyPolicyName("Bank example");
+		//configuration and set up
+		setUpConfiguration();
+		
 		BankProject bankProject = new BankProject();
 		var locationHelper = new LocationHelper();
 		locationHelper.createCountry("Serbia");
@@ -36,9 +40,11 @@ public class BankProject {
 
 		var eve = bankProject.bank.createCustomer("Eve");
 		
+		//use case 1
 		var start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var consent = bankProject.bank.createConsentDocument("Eve consent");
-		bankProject.bank.openAccount(bankUser, eve.getUsername(), start, bankProject.bank.createPurpose(), consent.getName());
+		bankProject.bank.openAccount(bankUser, eve.getUsername(), start, bankProject.bank.createPurpose("Open account 1", new ArrayList<Purpose>(),2,7), 
+				consent.getName());
 		//var complaint = bankProject.bank.createComplaintOnAction();
 		/*complaint.CreateDenial();*/
 		/*complaint.setConsent(consent);
@@ -48,5 +54,34 @@ public class BankProject {
 		//complaint.CreateWithDraw(new Withdraw());
 		//bankProject.bank.createComplaintOnData();
 		System.out.println("End");
+	}
+
+	private static void setUpConfiguration() {
+		Configuration.setXmlPath("model/bank.xmi");
+		Configuration.createDefaultConfiguration();
+		Configuration.setPrivacyPolicyName("Bank example");
+		Configuration.setDataSources(new ArrayList<String>()
+		{{
+			add("PubliclyAccessibleSources"); 
+			add("Identity document");
+			add("Internal");
+		}});
+		Configuration.setProtectionControlMethods(new ArrayList<String>()
+		{{
+			add("OriginalData"); 
+			add("Pseudonymisation");
+			add("Encryption");
+		}});
+		Configuration.setDefaultProtectionControls(new ArrayList<String>()
+		{{
+			add("OriginalData");
+		}});
+		
+		DataFactory.addPrivacyData("name", DataType.GENERAL);
+		DataFactory.addPrivacyData("account number", DataType.GENERAL);
+		DataFactory.addPrivacyData("identity number", DataType.BIOMETRIC);
+		DataFactory.addPrivacyData("email", DataType.GENERAL);
+		
+		DataFactory.addSharedPrivacyData("name", "name", true,null);
 	}
 }
