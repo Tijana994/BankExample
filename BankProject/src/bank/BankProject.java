@@ -6,8 +6,6 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.emf.common.util.EList;
-
 import bank.models.*;
 import privacyModel.DataType;
 import utility.PrivacyDataFactory.DataFactory;
@@ -42,7 +40,7 @@ public class BankProject {
 		
 		//use case 1
 		var start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		var consent = bankProject.bank.createConsentDocument("Eve consent");
+		var consent = bankProject.bank.createConsentDocument("Eve consent", eve.getUsername());
 		bankProject.bank.openAccount(bankUser, eve.getUsername(), start, bankProject.bank.createPurpose("Open account 1", new ArrayList<Purpose>(),2,7), 
 				consent.getName());
 		//var complaint = bankProject.bank.createComplaintOnAction();
@@ -82,6 +80,14 @@ public class BankProject {
 		DataFactory.addPrivacyData("identity number", DataType.BIOMETRIC);
 		DataFactory.addPrivacyData("email", DataType.GENERAL);
 		
-		DataFactory.addSharedPrivacyData("name", "name", true,null);
+		var encription = new ArrayList<String>()
+		{{
+			add("Encryption");
+		}};
+		
+		DataFactory.addSharedPrivacyData("name", "name", true, "Identity document", encription);
+		DataFactory.addSharedPrivacyData("account number", "account number", true, null, null);
+		DataFactory.addSharedPrivacyData("identity number", "identity number", true, "Identity document", encription);
+		DataFactory.addSharedPrivacyData("email", "email", true, null, null);
 	}
 }

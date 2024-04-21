@@ -4,12 +4,13 @@ import java.util.Date;
 
 import com.security.model.validation.annotations.PaperAnnotation;
 
-@PaperAnnotation(id="name", startDate="startDate",location="location")
+@PaperAnnotation(id="name", startDate="startDate",location="location", providedById ="createdBy")
 public class Document {
 
 	private String name;
 	private String location;
 	private Date startDate;
+	private String createdBy;
 
 	public String getName() {
 		return name;
@@ -33,5 +34,13 @@ public class Document {
 
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 }

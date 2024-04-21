@@ -77,12 +77,13 @@ public class Bank {
 	}
 	
 	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
-	public Document createConsentDocument(String name)
+	public Document createConsentDocument(String name, String createdByUsername)
 	{
 		Document document = new Document();
 		document.setName(name);
 		document.setLocation("somewhere");
 		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		document.setCreatedBy(createdByUsername);
 		return document;
 	}
 	

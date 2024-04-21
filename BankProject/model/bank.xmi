@@ -2,7 +2,7 @@
 <privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
   <policyStatements name="Open account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Open account 1"/>
-    <what datas="//@allSharedPrivacyData.0">
+    <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
       <actions>Collecting</actions>
     </what>
@@ -30,6 +30,13 @@
   <allDatas name="identity number"/>
   <allDatas name="email" type="General"/>
   <privacyPolicyHelper/>
-  <allConsents name="Eve consent" startDate="2024-04-20T22:23:55.423+0200" location="somewhere"/>
-  <allSharedPrivacyData name="name" privacydata="//@allDatas.0"/>
+  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-21T23:14:08.872+0200" location="somewhere"/>
+  <allSharedPrivacyData name="name" privacydata="//@allDatas.0" dataSource="Identity document">
+    <additionalProtectionControls>Encryption</additionalProtectionControls>
+  </allSharedPrivacyData>
+  <allSharedPrivacyData name="account number" privacydata="//@allDatas.1"/>
+  <allSharedPrivacyData name="identity number" privacydata="//@allDatas.2" dataSource="Identity document">
+    <additionalProtectionControls>Encryption</additionalProtectionControls>
+  </allSharedPrivacyData>
+  <allSharedPrivacyData name="email" privacydata="//@allDatas.3"/>
 </privacyModel:PrivacyPolicy>
