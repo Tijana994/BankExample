@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="ASCII"?>
 <privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
   <policyStatements name="Open account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
-    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Open account 1"/>
+    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Open account"/>
     <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
       <actions>Collecting</actions>
     </what>
     <how consent="//@allConsents.0"/>
   </policyStatements>
+  <policyStatements name="Check account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
+    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Check account"/>
+    <what datas="//@allSharedPrivacyData.1">
+      <actions>Access</actions>
+    </what>
+    <how/>
+  </policyStatements>
   <allPrincipals name="Ned - bank" type="NaturalPerson" birthdate="1990-04-10T00:00:00.000+0200" age="34"/>
   <allPrincipals name="Patti - bank" type="NaturalPerson" birthdate="1994-04-25T00:00:00.000+0200" age="30"/>
   <allPrincipals name="Green bank" subPrincipals="//@allPrincipals.0 //@allPrincipals.1" inhabits="//@locations.3"/>
-  <allPrincipals name="Eve" type="NaturalPerson" scope="Out"/>
+  <allPrincipals name="Eve" type="NaturalPerson" scope="Out" age="16"/>
   <locations name="Serbia" type="Country" subLocations="//@locations.1"/>
   <locations name="Novi Sad" type="Region"/>
   <locations name="Hungary" type="Country" subLocations="//@locations.3"/>
@@ -30,7 +37,7 @@
   <allDatas name="identity number"/>
   <allDatas name="email" type="General"/>
   <privacyPolicyHelper/>
-  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-21T23:14:08.872+0200" location="somewhere"/>
+  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-25T00:36:53.336+0200" location="somewhere"/>
   <allSharedPrivacyData name="name" privacydata="//@allDatas.0" dataSource="Identity document">
     <additionalProtectionControls>Encryption</additionalProtectionControls>
   </allSharedPrivacyData>

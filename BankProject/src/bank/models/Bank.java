@@ -1,32 +1,28 @@
 package bank.models;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
-import com.security.model.validation.annotations.creators.CreateComplaintBasedOnActionAnnotation;
-import com.security.model.validation.annotations.creators.CreateComplaintBasedOnDataAnnotation;
-import com.security.model.validation.annotations.creators.CreateConsentAnnotation;
-import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
-import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 import com.security.model.validation.annotations.enums.Constants;
 
+import bank.managers.*;
 import privacyModel.Action;
-import privacyModel.ComplaintBasedOnDataType;
-import privacyModel.ConsentFormat;
-import privacyModel.ConsentType;
-import privacyModel.DocumentType;
-import privacyModel.PrincipalScope;
-import privacyModel.PrincipalType;
 import privacyModel.TimePreposition;
 
 public class Bank {
+	
+	private UserManager userManager;
+	private DocumentManager documentManager;
+	private ComplaintManager complaintManager;
+	
+	public Bank()
+	{
+		this.userManager = new UserManager();
+		this.documentManager = new DocumentManager();
+		this.complaintManager = new ComplaintManager();
+	}
 
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
@@ -39,72 +35,42 @@ public class Bank {
 		//createChildCustodyDocument("Child custody test");
 		return log;
 	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+			why ="purpose", when = "start", actions = {Action.ACCESS}, datas = {"account number"})
+	public Log checkAccount(User employee, String userId, Date start, Purpose purpose)
+	{
+		var log = new Log();
+		log.setName("Check account for " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "bank",
+			why ="purpose", when = "start, end", actions = {Action.TRANSFER}, datas = {"name" , "email", "account number", "identity number"})
+	public Log transferAccount(User employee, String userId, User bank, Date start, Date end, Purpose purpose, Location location)
+	{
+		var log = new Log();
+		log.setName("Transfer account for " + userId);
+		return log;
+	}
 
 	public Purpose createPurpose(String text, List<Purpose> subpurposes, int reason, int subtype) {
 		var purpose = new Purpose(text, subpurposes,reason,subtype);
 		return purpose;
 	}
 	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON, shouldSetBirtday = true)
-	public User createEmployee(String username, LocalDate birthday)
-	{
-		var date = java.util.Date.from(birthday.atStartOfDay()
-			      .atZone(ZoneId.systemDefault())
-			      .toInstant());
-		return new User(username, date);
+	public UserManager getUserManager() {
+		return userManager;
 	}
-	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON)
-	public User createCustomer(String username)
-	{
-		return new User(username);
+
+	public DocumentManager getDocumentManager() {
+		return documentManager;
 	}
-	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)
-	public User createLegalEntity(String username, ArrayList<User> employees, Location located)
-	{ 
-		return new User(username, employees, located);
+
+	public ComplaintManager getComplaintManager() {
+		return complaintManager;
 	}
-	
-	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
-	private Document createChildCustodyDocument(String name)
-	{
-		Document document = new Document();
-		document.setName(name);
-		document.setLocation("somewhere");
-		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		return document;
-	}
-	
-	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
-	public Document createConsentDocument(String name, String createdByUsername)
-	{
-		Document document = new Document();
-		document.setName(name);
-		document.setLocation("somewhere");
-		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		document.setCreatedBy(createdByUsername);
-		return document;
-	}
-	
-	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION)
-	public Complaint createComplaintOnData()
-	{
-		var complaint = new Complaint();
-		complaint.setName("Name text");
-		complaint.setReason("Reason text");
-		return complaint;
-	}
-	
-	@CreateComplaintBasedOnActionAnnotation()
-	public Complaint createComplaintOnAction()
-	{
-		var complaint = new Complaint();
-		complaint.setName("Name text");
-		complaint.setReason("Reason text");
-		return complaint;
-	}
-	
+
 	@TimeStatementAnnotation(preposition = TimePreposition.AT)
 	public Date start;
 }

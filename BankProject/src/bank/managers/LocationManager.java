@@ -1,10 +1,11 @@
-package bank.models;
+package bank.managers;
 
 import com.security.model.validation.annotations.creators.CreateLocationAnnotation;
 
+import bank.models.Location;
 import privacyModel.LocationType;
 
-public class LocationHelper {
+public class LocationManager {
 	
 	@CreateLocationAnnotation(locationType = LocationType.REGION)
 	public Location createCity(String name, String parentId)

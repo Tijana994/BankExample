@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 
+import bank.managers.LocationManager;
 import bank.models.*;
 import privacyModel.DataType;
 import utility.PrivacyDataFactory.DataFactory;
@@ -25,35 +26,40 @@ public class BankProject {
 		setUpConfiguration();
 		
 		BankProject bankProject = new BankProject();
-		var locationHelper = new LocationHelper();
+		var locationHelper = new LocationManager();
 		locationHelper.createCountry("Serbia");
 		locationHelper.createCity("Novi Sad", "Serbia");
 		locationHelper.createCountry("Hungary");
 		var city2 = locationHelper.createCity("Budapest", "Hungary");
 		var employees = new ArrayList<User>();
-		employees.add(bankProject.bank.createEmployee("Ned - bank", LocalDate.of(1990, 4, 10)));
-		employees.add(bankProject.bank.createEmployee("Patti - bank", LocalDate.of(1994, 4, 25)));
-		var bankUser = bankProject.bank.createLegalEntity("Green bank", employees, city2);
+		employees.add(bankProject.bank.getUserManager().createEmployee("Ned - bank", LocalDate.of(1990, 4, 10)));
+		employees.add(bankProject.bank.getUserManager().createEmployee("Patti - bank", LocalDate.of(1994, 4, 25)));
+		var bankUser = bankProject.bank.getUserManager().createLegalEntity("Green bank", employees, city2);
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 
-		var eve = bankProject.bank.createCustomer("Eve");
+		var eve = bankProject.bank.getUserManager().createCustomer("Eve");
 		
 		//use case 1
-		var start = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		var consent = bankProject.bank.createConsentDocument("Eve consent", eve.getUsername());
-		bankProject.bank.openAccount(bankUser, eve.getUsername(), start, bankProject.bank.createPurpose("Open account 1", new ArrayList<Purpose>(),2,7), 
+		//1.1
+		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername());
+		bankProject.bank.openAccount(bankUser, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
 				consent.getName());
+		
+		//1.2
+		bankProject.bank.checkAccount(bankUser, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.createPurpose("Check account", new ArrayList<Purpose>(),2,7));
+		
 		//var complaint = bankProject.bank.createComplaintOnAction();
 		/*complaint.CreateDenial();*/
-		/*complaint.setConsent(consent);
-		
-		bankProject.bank.createCity("Novi Sad", "Italy");*/
+		/*complaint.setConsent(consent);*/
 		//complaint.CreateWithDraw(consent);
 		//complaint.CreateWithDraw(new Withdraw());
 		//bankProject.bank.createComplaintOnData();
 		System.out.println("End");
 	}
 
+	@SuppressWarnings("serial")
 	private static void setUpConfiguration() {
 		Configuration.setXmlPath("model/bank.xmi");
 		Configuration.createDefaultConfiguration();
