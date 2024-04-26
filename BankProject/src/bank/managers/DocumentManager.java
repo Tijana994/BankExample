@@ -15,21 +15,32 @@ import privacyModel.DocumentType;
 public class DocumentManager {
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
-	private Document createChildCustodyDocument(String name)
+	public Document createChildCustodyDocument(String name, String location)
 	{
 		Document document = new Document();
 		document.setName(name);
-		document.setLocation("somewhere");
+		document.setLocation(location);
 		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
 		return document;
 	}
 	
 	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
-	public Document createConsentDocument(String name, String createdByUsername)
+	public Document createConsentDocument(String name, String createdByUsername, String location)
 	{
 		Document document = new Document();
 		document.setName(name);
-		document.setLocation("somewhere");
+		document.setLocation(location);
+		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		document.setCreatedBy(createdByUsername);
+		return document;
+	}
+	
+	@CreateDocumentAnnotation(documentType = DocumentType.TRANSFER_CERTIFICATE)
+	public Document createTransferDocument(String name, String createdByUsername, String location)
+	{
+		Document document = new Document();
+		document.setName(name);
+		document.setLocation(location);
 		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
 		document.setCreatedBy(createdByUsername);
 		return document;

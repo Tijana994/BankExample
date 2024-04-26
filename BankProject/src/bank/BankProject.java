@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import bank.managers.LocationManager;
@@ -28,12 +29,14 @@ public class BankProject {
 		BankProject bankProject = new BankProject();
 		var locationHelper = new LocationManager();
 		locationHelper.createCountry("Serbia");
-		locationHelper.createCity("Novi Sad", "Serbia");
+		var city1 = locationHelper.createCity("Novi Sad", "Serbia");
 		locationHelper.createCountry("Hungary");
 		var city2 = locationHelper.createCity("Budapest", "Hungary");
 		var employees = new ArrayList<User>();
-		employees.add(bankProject.bank.getUserManager().createEmployee("Ned - bank", LocalDate.of(1990, 4, 10)));
-		employees.add(bankProject.bank.getUserManager().createEmployee("Patti - bank", LocalDate.of(1994, 4, 25)));
+		var ned = bankProject.bank.getUserManager().createEmployee("Ned - bank", LocalDate.of(1990, 4, 10));
+		employees.add(ned);
+		var patti = bankProject.bank.getUserManager().createEmployee("Patti - bank", LocalDate.of(1994, 4, 25));
+		employees.add(patti);
 		var bankUser = bankProject.bank.getUserManager().createLegalEntity("Green bank", employees, city2);
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 
@@ -41,15 +44,21 @@ public class BankProject {
 		
 		//use case 1
 		//1.1
-		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername());
-		bankProject.bank.openAccount(bankUser, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
+		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
+		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
 				consent.getName());
 		
 		//1.2
-		bankProject.bank.checkAccount(bankUser, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.createPurpose("Check account", new ArrayList<Purpose>(),2,7));
+		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
 		
+		//1.3
+		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Eve consent", eve.getUsername(), "system");
+		bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser,
+				Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)),
+				bankProject.bank.getAccountManager().createPurpose("Transfer account", new ArrayList<Purpose>(),2,7),
+				city2, city1,consent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
 		//var complaint = bankProject.bank.createComplaintOnAction();
 		/*complaint.CreateDenial();*/
 		/*complaint.setConsent(consent);*/

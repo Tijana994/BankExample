@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
-<privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
-  <policyStatements name="Open account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
+<privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
+  <policyStatements name="Open account for Eve" who="//@allPrincipals.0" whose="//@allPrincipals.3">
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-04-26T17:18:18.207+0200"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Open account"/>
     <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
@@ -8,12 +9,24 @@
     </what>
     <how consent="//@allConsents.0"/>
   </policyStatements>
-  <policyStatements name="Check account for Eve" who="//@allPrincipals.2" whose="//@allPrincipals.3">
+  <policyStatements name="Check account for Eve" who="//@allPrincipals.0" whose="//@allPrincipals.3">
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-04-26T17:18:59.618+0200"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Check account"/>
     <what datas="//@allSharedPrivacyData.1">
       <actions>Access</actions>
     </what>
     <how/>
+  </policyStatements>
+  <policyStatements name="Transfer account for Eve" who="//@allPrincipals.0" whose="//@allPrincipals.3" whom="//@allPrincipals.2">
+    <when xsi:type="privacyModel:TimeInterval">
+      <start dateTime="2024-04-26T17:19:03.671+0200"/>
+      <end preposition="to" dateTime="2024-04-26T17:19:03.671+0200"/>
+    </when>
+    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Transfer account"/>
+    <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
+      <actions>Transfer</actions>
+    </what>
+    <how consent="//@allConsents.0"/>
   </policyStatements>
   <allPrincipals name="Ned - bank" type="NaturalPerson" birthdate="1990-04-10T00:00:00.000+0200" age="34"/>
   <allPrincipals name="Patti - bank" type="NaturalPerson" birthdate="1994-04-25T00:00:00.000+0200" age="30"/>
@@ -37,7 +50,8 @@
   <allDatas name="identity number"/>
   <allDatas name="email" type="General"/>
   <privacyPolicyHelper/>
-  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-25T00:36:53.336+0200" location="somewhere"/>
+  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-26T17:18:18.192+0200" location="Novi Sad 1"/>
+  <allDocuments name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-26T17:19:03.638+0200" location="system" documentType="TransferCertificate"/>
   <allSharedPrivacyData name="name" privacydata="//@allDatas.0" dataSource="Identity document">
     <additionalProtectionControls>Encryption</additionalProtectionControls>
   </allSharedPrivacyData>
