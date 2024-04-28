@@ -2,6 +2,7 @@ package bank;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,11 +40,11 @@ public class BankProject {
 		employees.add(patti);
 		var bankUser = bankProject.bank.getUserManager().createLegalEntity("Green bank", employees, city2);
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
-
-		var eve = bankProject.bank.getUserManager().createCustomer("Eve");
 		
 		//use case 1
 		//1.1
+		var eve = bankProject.bank.getUserManager().createCustomer("Eve");
+		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
@@ -54,11 +55,19 @@ public class BankProject {
 				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
 		
 		//1.3
+		var from = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
+		var to = java.util.Date.from(LocalDate.of(2034, 4, 25).atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant());
 		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Eve consent", eve.getUsername(), "system");
-		bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser,
-				Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)),
+		bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
 				bankProject.bank.getAccountManager().createPurpose("Transfer account", new ArrayList<Purpose>(),2,7),
 				city2, city1,consent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
+		
+		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		
+		//2.1
+		var alice = bankProject.bank.getUserManager().createEmployee("Alice", LocalDate.of(2010, 4, 10));
 		//var complaint = bankProject.bank.createComplaintOnAction();
 		/*complaint.CreateDenial();*/
 		/*complaint.setConsent(consent);*/

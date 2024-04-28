@@ -8,6 +8,7 @@ public class Bank {
 	private DocumentManager documentManager;
 	private ComplaintManager complaintManager;
 	private AccountManager accountManager;
+	private NotificationManager notificationManager;
 	
 	public Bank()
 	{
@@ -15,6 +16,7 @@ public class Bank {
 		this.documentManager = new DocumentManager();
 		this.complaintManager = new ComplaintManager();
 		this.accountManager = new AccountManager();
+		this.notificationManager = new NotificationManager();
 	}
 	
 	public UserManager getUserManager() {
@@ -31,5 +33,9 @@ public class Bank {
 
 	public AccountManager getAccountManager() {
 		return accountManager;
+	}
+
+	public NotificationManager getNotificationManager() {
+		return notificationManager;
 	}
 }

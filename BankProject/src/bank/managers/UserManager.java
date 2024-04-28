@@ -28,6 +28,15 @@ public class UserManager {
 		return new User(username);
 	}
 	
+	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON)
+	public User createMinorCustomer(String username, LocalDate birthday)
+	{
+		var date = java.util.Date.from(birthday.atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant());
+		return new User(username, date);
+	}
+	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)
 	public User createLegalEntity(String username, ArrayList<User> employees, Location located)
 	{ 
