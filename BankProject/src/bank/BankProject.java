@@ -83,6 +83,9 @@ public class BankProject {
 		bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
 		
+		//2.3
+		bankProject.bank.getComplaintManager().createComplaintOnData("Rectification of email","Change email",new ArrayList<String>(Arrays.asList("email")));
+		
 		System.out.println("End");
 	}
 
