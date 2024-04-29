@@ -11,9 +11,10 @@ import privacyModel.NotificationType;
 public class NotificationManager {
 	
 	@CreateNotificationAnnotation(causedByType = TargetType.PolicyStatement, type = NotificationType.THIRD_PARTY_TRANSFER)
-	public UserNotification notifyUserAboutTransfer(String name, Date timestamp)
+	public UserNotification notifyUserAboutTransfer(String name, Date timestamp, String causedById, 
+			String receiverId, String notifierId)
 	{
-		return new UserNotification(name,timestamp);
+		return new UserNotification(name,timestamp, causedById, receiverId, notifierId);
 	}
 
 }

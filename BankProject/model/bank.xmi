@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.2">
   <policyStatements name="Open account for Eve" who="//@allPrincipals.0" whose="//@allPrincipals.3">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-04-28T17:59:23.303+0200"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-04-29T12:16:23.593+0200"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Open account"/>
     <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
@@ -11,7 +11,7 @@
     <where/>
   </policyStatements>
   <policyStatements name="Check account for Eve" who="//@allPrincipals.0" whose="//@allPrincipals.3">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-04-28T17:59:23.354+0200"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-04-29T12:16:23.649+0200"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Check account"/>
     <what datas="//@allSharedPrivacyData.1">
       <actions>Access</actions>
@@ -21,7 +21,7 @@
   </policyStatements>
   <policyStatements name="Transfer account for Eve" who="//@allPrincipals.0" whose="//@allPrincipals.3" whom="//@allPrincipals.2">
     <when xsi:type="privacyModel:TimeInterval">
-      <start dateTime="2024-04-28T17:59:23.367+0200"/>
+      <start dateTime="2024-04-29T12:16:23.664+0200"/>
       <end preposition="to" dateTime="2034-04-25T00:00:00.000+0200"/>
     </when>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details="Transfer account"/>
@@ -54,9 +54,9 @@
   <allDatas name="identity number"/>
   <allDatas name="email" type="General"/>
   <privacyPolicyHelper/>
-  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-28T17:59:23.290+0200" location="Novi Sad 1"/>
-  <allDocuments name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-28T17:59:23.373+0200" location="system" documentType="TransferCertificate"/>
-  <notifications name="Notify Eve about transfer" type="ThirdPartyTransfer" when="2024-04-28T17:59:23.411+0200"/>
+  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-29T12:16:23.579+0200" location="Novi Sad 1"/>
+  <allDocuments name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-04-29T12:16:23.669+0200" location="system" documentType="TransferCertificate"/>
+  <notifications name="Notify Eve about transfer" type="ThirdPartyTransfer" notifiers="//@allPrincipals.2" receivers="//@allPrincipals.3" causedBy="//@policyStatements.2" when="2024-04-29T12:16:23.706+0200"/>
   <allSharedPrivacyData name="name" privacydata="//@allDatas.0" dataSource="Identity document">
     <additionalProtectionControls>Encryption</additionalProtectionControls>
   </allSharedPrivacyData>

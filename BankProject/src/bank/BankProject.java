@@ -60,11 +60,12 @@ public class BankProject {
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
 		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Eve consent", eve.getUsername(), "system");
-		bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
+		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
 				bankProject.bank.getAccountManager().createPurpose("Transfer account", new ArrayList<Purpose>(),2,7),
 				city2, city1,consent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
 		
-		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				transferLog.getName(), eve.getUsername(), bankUser.getUsername());
 		
 		//2.1
 		var alice = bankProject.bank.getUserManager().createEmployee("Alice", LocalDate.of(2010, 4, 10));
