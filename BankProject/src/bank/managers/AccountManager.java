@@ -19,13 +19,12 @@ public class AccountManager {
 
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
-			howConsentId = "consentId")
+			howConsentId = "consentId", howDocumentsIds = "custodyocumentId")
 	public Log openAccount(User employee, String userId,@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
-			Purpose purpose, String consentId)
+			Purpose purpose, String consentId, ArrayList<String> custodyocumentId)
 	{
 		var log = new Log();
 		log.setName("Open account for " + userId);
-		//createChildCustodyDocument("Child custody test");
 		return log;
 	}
 	

@@ -15,12 +15,13 @@ import privacyModel.DocumentType;
 public class DocumentManager {
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
-	public Document createChildCustodyDocument(String name, String location)
+	public Document createChildCustodyDocument(String name, String createdByUsername, String location)
 	{
 		Document document = new Document();
 		document.setName(name);
 		document.setLocation(location);
 		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		document.setCreatedBy(createdByUsername);
 		return document;
 	}
 	

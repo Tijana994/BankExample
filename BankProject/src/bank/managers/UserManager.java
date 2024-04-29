@@ -3,10 +3,12 @@ package bank.managers;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 
 import bank.models.Location;
+import bank.models.MinorUser;
 import bank.models.User;
 import privacyModel.PrincipalScope;
 import privacyModel.PrincipalType;
@@ -28,13 +30,13 @@ public class UserManager {
 		return new User(username);
 	}
 	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON)
-	public User createMinorCustomer(String username, LocalDate birthday)
+	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, shouldSetBirtday = true)
+	public MinorUser createMinorCustomer(String username, LocalDate birthday, List<User> responsiblePersons)
 	{
 		var date = java.util.Date.from(birthday.atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
-		return new User(username, date);
+		return new MinorUser(username, date, responsiblePersons);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)

@@ -48,7 +48,7 @@ public class BankProject {
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
-				consent.getName());
+				consent.getName(), new ArrayList<String>());
 		
 		//1.2
 		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -59,22 +59,26 @@ public class BankProject {
 		var to = java.util.Date.from(LocalDate.of(2034, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
+		var transferconsent = bankProject.bank.getDocumentManager().createConsentDocument("Transfer consent Eve", eve.getUsername(), "Novi Sad 1");
 		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Eve consent", eve.getUsername(), "system");
 		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
 				bankProject.bank.getAccountManager().createPurpose("Transfer account", new ArrayList<Purpose>(),2,7),
-				city2, city1,consent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
+				city2, city1,transferconsent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				transferLog.getName(), eve.getUsername(), bankUser.getUsername());
 		
+		//use case 2
 		//2.1
-		var alice = bankProject.bank.getUserManager().createEmployee("Alice", LocalDate.of(2010, 4, 10));
-		//var complaint = bankProject.bank.createComplaintOnAction();
-		/*complaint.CreateDenial();*/
-		/*complaint.setConsent(consent);*/
-		//complaint.CreateWithDraw(consent);
-		//complaint.CreateWithDraw(new Withdraw());
-		//bankProject.bank.createComplaintOnData();
+		var john = bankProject.bank.getUserManager().createCustomer("John");
+		var alice = bankProject.bank.getUserManager().createMinorCustomer("Alice", LocalDate.of(2010, 4, 10), 
+				new ArrayList<User>(Arrays.asList(john)));
+		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
+		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
+		bankProject.bank.getAccountManager().openAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
+				consent1.getName(), new ArrayList<String>(Arrays.asList(childCustody.getName())));
+		
 		System.out.println("End");
 	}
 
