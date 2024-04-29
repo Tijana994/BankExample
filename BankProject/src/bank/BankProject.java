@@ -79,6 +79,10 @@ public class BankProject {
 				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
 				consent1.getName(), new ArrayList<String>(Arrays.asList(childCustody.getName())));
 		
+		//2.2
+		bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
+		
 		System.out.println("End");
 	}
 
