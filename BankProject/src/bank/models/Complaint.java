@@ -1,6 +1,7 @@
 package bank.models;
 
 import java.util.Date;
+import java.util.List;
 
 import com.security.model.validation.annotations.ComplaintAnnotation;
 import com.security.model.validation.annotations.creators.CreateDenialAnnotation;
@@ -19,30 +20,30 @@ public class Complaint {
 	private String consentId;
 	private String userId;
 	
-	@CreateDenialAnnotation()
-	public Denial CreateDenial()
+	@CreateDenialAnnotation(forComplaintId = "complaintId", approvedById = "approvedById", basedOnStatemetsIds = "tasks")
+	public Denial createDenial(String name, String reason, String complaintId, String approvedById, List<String> tasks)
 	{
 		var denial = new Denial();
-		denial.setName("testName");
-		denial.setReason("something");
+		denial.setName(name);
+		denial.setReason(reason);
 		denial.setDate(new Date());
 		return denial;
 	}
 	
 	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw", consent = "consent", parametersLocation = ParametersObjectsLocation.Property)
-	public void CreateWithDraw()
+	public void createWithDraw()
 	{
 		withdraw = new Withdraw();
 	}
 	
 	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Property, name = "withdraw", consent = "consent", parametersLocation = ParametersObjectsLocation.Parameter)
-	public void CreateWithDraw(Document consent)
+	public void createWithDraw(Document consent)
 	{
 		withdraw = new Withdraw();
 	}
 	
 	@CreateWithdrawAnnotation(createdObjectLocation = CreatedObjectLocation.Parameter, name = "withdraw", consentId = "consentId")
-	public void CreateWithDraw(Withdraw withdraw)
+	public void createWithDraw(Withdraw withdraw)
 	{
 	    setConsentId("1234");
 		withdraw.setName("Testic");

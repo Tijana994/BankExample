@@ -31,4 +31,11 @@ public class NotificationManager {
 	{
 		return new UserNotification(name,timestamp, causedById, receiverId, notifierId);
 	}
+	
+	@CreateNotificationAnnotation(causedByType = TargetType.ComplaintBasedOnData, type = NotificationType.ERASURE)
+	public UserNotification notifyUserAboutErasure(String name, Date timestamp, String causedById, 
+			List<String> receiversIds, String notifierId)
+	{
+		return new UserNotification(name,timestamp, causedById, receiversIds, notifierId);
+	}
 }

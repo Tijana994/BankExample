@@ -80,7 +80,7 @@ public class BankProject {
 				consent1.getName(), new ArrayList<String>(Arrays.asList(childCustody.getName())));
 		
 		//2.2
-		bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		var log1 = bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
 		
 		//2.3
@@ -97,12 +97,17 @@ public class BankProject {
 		//2.3
 		var complaint2 = bankProject.bank.getComplaintManager().createComplaintOnDataForErasure("Erasure of email - Alice","-",
 				new ArrayList<String>(Arrays.asList("email")), alice.getUsername());
+		bankProject.bank.getNotificationManager().notifyUserAboutErasure("Notify Alice and Green bank about erasure", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				complaint2.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
+		complaint2.createDenial("Erasure cannot be done - need parent persmission","Still processing", complaint2.getName(),
+				bankUser.getUsername(), new ArrayList<String>(Arrays.asList(log1.getName())));
 		
 		//3.1
+		var subpurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),6,0);
+		var purpose = bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
-				consent2.getName(), new ArrayList<String>());
+				purpose, consent2.getName(), new ArrayList<String>());
 		
 		System.out.println("End");
 	}
