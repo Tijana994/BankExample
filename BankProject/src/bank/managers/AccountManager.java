@@ -38,6 +38,16 @@ public class AccountManager {
 		return log;
 	}
 	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+			why ="purpose", when = "start", actions = {Action.RECTIFICATION}, datas = {"email"}, causedById = "complaintId")
+	public Log rectificationOfData(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
+	{
+		var log = new Log();
+		log.setName("Data rectification for " + userId);
+		return log;
+	}
+	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whom = "bank",
 			why ="purpose", when = "start,end", actions = {Action.TRANSFER}, 
 			howConsentId = "consentId", howDocumentsIds = "transferDocumentId", whereSource = "locationSource", 

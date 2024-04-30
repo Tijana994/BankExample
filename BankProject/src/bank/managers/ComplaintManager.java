@@ -14,21 +14,33 @@ import privacyModel.ComplaintBasedOnDataType;
 public class ComplaintManager {
 
 	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION, subjectsIds = "datalist")
-	public Complaint createComplaintOnData(String name, String reason, List<String> datalist)
+	public Complaint createComplaintOnDataForRectification(String name, String reason, List<String> datalist, String userId)
 	{
 		var complaint = new Complaint();
 		complaint.setName(name);
 		complaint.setReason(reason);
 		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		complaint.setUserId(userId);
 		return complaint;
 	}
 	
-	@CreateComplaintBasedOnActionAnnotation()
-	public Complaint createComplaintOnAction()
+	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.ERASURE, subjectsIds = "datalist")
+	public Complaint createComplaintOnDataForErasure(String name, String reason, List<String> datalist, String userId)
 	{
 		var complaint = new Complaint();
-		complaint.setName("Name text");
-		complaint.setReason("Reason text");
+		complaint.setName(name);
+		complaint.setReason(reason);
+		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		complaint.setUserId(userId);
+		return complaint;
+	}
+	
+	@CreateComplaintBasedOnActionAnnotation(policyStatementId = "actionId")
+	public Complaint createComplaintOnAction(String name, String reason, String actionId)
+	{
+		var complaint = new Complaint();
+		complaint.setName(name);
+		complaint.setReason(reason);
 		return complaint;
 	}
 }

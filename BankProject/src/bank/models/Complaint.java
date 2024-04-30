@@ -8,7 +8,7 @@ import com.security.model.validation.annotations.creators.CreateWithdrawAnnotati
 import com.security.model.validation.annotations.enums.CreatedObjectLocation;
 import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
 
-@ComplaintAnnotation(id="name", reason = "reason", when = "time")
+@ComplaintAnnotation(id="name", reason = "reason", when = "time", whoId = "userId")
 public class Complaint {
 
 	private String name;
@@ -17,6 +17,7 @@ public class Complaint {
 	private Withdraw withdraw;
 	private Document consent;
 	private String consentId;
+	private String userId;
 	
 	@CreateDenialAnnotation()
 	public Denial CreateDenial()
@@ -89,5 +90,13 @@ public class Complaint {
 
 	public void setConsentId(String consentId) {
 		this.consentId = consentId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

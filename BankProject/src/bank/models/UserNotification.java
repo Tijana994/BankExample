@@ -23,6 +23,17 @@ public class UserNotification {
 		notifiersIds.add(notifierId);
 	}
 	
+	public UserNotification(String id, Date timestamp, String causedById, List<String> receiversIds, String notifierId) {
+		super();
+		this.id = id;
+		this.timestamp = timestamp;
+		this.causedById = causedById;
+		this.receiversIds = receiversIds;
+		this.notifierId = notifierId;
+		this.notifiersIds = new ArrayList<String>();
+		notifiersIds.add(notifierId);
+	}
+	
 	private String id;
 	private Date timestamp;
 	private String causedById;

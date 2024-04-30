@@ -84,7 +84,25 @@ public class BankProject {
 				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
 		
 		//2.3
-		bankProject.bank.getComplaintManager().createComplaintOnData("Rectification of email","Change email",new ArrayList<String>(Arrays.asList("email")));
+		var complaint1 = bankProject.bank.getComplaintManager().createComplaintOnDataForRectification("Rectification of email","Change email",
+				new ArrayList<String>(Arrays.asList("email")), alice.getUsername());
+		
+		bankProject.bank.getNotificationManager().notifyUserAboutRectification("Notify Alice and Green bank about rectification", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				complaint1.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
+		var rectification = bankProject.bank.getAccountManager().rectificationOfData(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.getAccountManager().createPurpose("Data rectification", new ArrayList<Purpose>(),2,7), complaint1.getName());
+		bankProject.bank.getNotificationManager().notifyUserAboutExecutedRectification("Notify Alice about rectified email", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				rectification.getName(), alice.getUsername(), bankUser.getUsername());
+		
+		//2.3
+		var complaint2 = bankProject.bank.getComplaintManager().createComplaintOnDataForErasure("Erasure of email - Alice","-",
+				new ArrayList<String>(Arrays.asList("email")), alice.getUsername());
+		
+		//3.1
+		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
+		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
+				consent2.getName(), new ArrayList<String>());
 		
 		System.out.println("End");
 	}
