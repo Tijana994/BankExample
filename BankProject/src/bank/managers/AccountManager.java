@@ -61,6 +61,26 @@ public class AccountManager {
 		log.setName("Transfer account for " + userId);
 		return log;
 	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+			why ="purpose", when = "start", actions = {Action.ACCESS}, datas = {"email"})
+	public Log emailSendingForCard(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose)
+	{
+		var log = new Log();
+		log.setName("Email sending for new credit card to " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+			why ="purpose", when = "start", actions = {Action.STOP_PROCESSING}, datas = {"email"}, causedById = "complaintId")
+	public Log stopSendingEmails(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
+	{
+		var log = new Log();
+		log.setName("Stop sending mails to " + userId);
+		return log;
+	}
 
 	public Purpose createPurpose(String text, List<Purpose> subpurposes, int reason, int subtype) {
 		var purpose = new Purpose(text, subpurposes,reason,subtype);

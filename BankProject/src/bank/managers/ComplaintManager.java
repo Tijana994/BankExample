@@ -36,11 +36,13 @@ public class ComplaintManager {
 	}
 	
 	@CreateComplaintBasedOnActionAnnotation(policyStatementId = "actionId")
-	public Complaint createComplaintOnAction(String name, String reason, String actionId)
+	public Complaint createComplaintOnAction(String name, String reason, String actionId, String userId)
 	{
 		var complaint = new Complaint();
 		complaint.setName(name);
 		complaint.setReason(reason);
+		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		complaint.setUserId(userId);
 		return complaint;
 	}
 }

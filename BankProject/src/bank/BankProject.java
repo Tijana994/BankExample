@@ -80,7 +80,7 @@ public class BankProject {
 		
 		//2.2
 		var log1 = bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
+				defaultPurpose);
 		
 		//2.3
 		var complaint1 = bankProject.bank.getComplaintManager().createComplaintOnDataForRectification("Rectification of email","Change email",
@@ -107,6 +107,17 @@ public class BankProject {
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				purpose, consent2.getName(), new ArrayList<String>());
+		
+		//3.2
+		var emailSending = bankProject.bank.getAccountManager().emailSendingForCard(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				subpurpose);
+		
+		//3.3
+		var complaint3 = bankProject.bank.getComplaintManager().createComplaintOnAction("Stop sending emails in marketing purpose","-",
+				emailSending.getName(), john.getUsername());
+		var stopProcessing = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),11,0);
+		var stopSending = bankProject.bank.getAccountManager().stopSendingEmails(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				stopProcessing, complaint3.getName());
 		
 		System.out.println("End");
 	}
