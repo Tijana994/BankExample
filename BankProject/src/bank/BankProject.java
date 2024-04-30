@@ -41,18 +41,19 @@ public class BankProject {
 		var bankUser = bankProject.bank.getUserManager().createLegalEntity("Green bank", employees, city2);
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 		
+		var defaultPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
+		
 		//use case 1
 		//1.1
 		var eve = bankProject.bank.getUserManager().createCustomer("Eve");
 		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
-				consent.getName(), new ArrayList<String>());
+				defaultPurpose, consent.getName(), new ArrayList<String>());
 		
 		//1.2
 		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.getAccountManager().createPurpose("Check account", new ArrayList<Purpose>(),2,7));
+				defaultPurpose);
 		
 		//1.3
 		var from = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
@@ -62,8 +63,7 @@ public class BankProject {
 		var transferconsent = bankProject.bank.getDocumentManager().createConsentDocument("Transfer consent Eve", eve.getUsername(), "Novi Sad 1");
 		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Eve consent", eve.getUsername(), "system");
 		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
-				bankProject.bank.getAccountManager().createPurpose("Transfer account", new ArrayList<Purpose>(),2,7),
-				city2, city1,transferconsent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
+				defaultPurpose, city2, city1,transferconsent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				transferLog.getName(), eve.getUsername(), bankUser.getUsername());
@@ -76,8 +76,7 @@ public class BankProject {
 		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
 		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
 		bankProject.bank.getAccountManager().openAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(),2,7), 
-				consent1.getName(), new ArrayList<String>(Arrays.asList(childCustody.getName())));
+				defaultPurpose, consent1.getName(), new ArrayList<String>(Arrays.asList(childCustody.getName())));
 		
 		//2.2
 		var log1 = bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -90,11 +89,11 @@ public class BankProject {
 		bankProject.bank.getNotificationManager().notifyUserAboutRectification("Notify Alice and Green bank about rectification", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				complaint1.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
 		var rectification = bankProject.bank.getAccountManager().rectificationOfData(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				bankProject.bank.getAccountManager().createPurpose("Data rectification", new ArrayList<Purpose>(),2,7), complaint1.getName());
+				defaultPurpose, complaint1.getName());
 		bankProject.bank.getNotificationManager().notifyUserAboutExecutedRectification("Notify Alice about rectified email", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				rectification.getName(), alice.getUsername(), bankUser.getUsername());
 		
-		//2.3
+		//2.4
 		var complaint2 = bankProject.bank.getComplaintManager().createComplaintOnDataForErasure("Erasure of email - Alice","-",
 				new ArrayList<String>(Arrays.asList("email")), alice.getUsername());
 		bankProject.bank.getNotificationManager().notifyUserAboutErasure("Notify Alice and Green bank about erasure", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -104,7 +103,7 @@ public class BankProject {
 		
 		//3.1
 		var subpurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),6,0);
-		var purpose = bankProject.bank.getAccountManager().createPurpose("Open account", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
+		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				purpose, consent2.getName(), new ArrayList<String>());
