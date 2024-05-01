@@ -118,6 +118,14 @@ public class BankProject {
 		var stopProcessing = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),11,0);
 		var stopSending = bankProject.bank.getAccountManager().stopSendingEmails(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				stopProcessing, complaint3.getName());
+		bankProject.bank.getNotificationManager().notifyUserAboutStopSendingMails("Notify John about stop sending mails", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				stopSending.getName(), john.getUsername(), bankUser.getUsername());
+		
+		//3.4
+		var complaint4 = bankProject.bank.getComplaintManager().createComplaintWithWithdraw("John consent withdrawal", "Chaninging bank", 
+				consent2.getName(), john.getUsername());
+		bankProject.bank.getNotificationManager().notifyUserAboutWithdrawal("Notify John and Ned about withdrawal", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				complaint4.getName(), new ArrayList<String>(Arrays.asList(john.getUsername(),ned.getUsername())), bankUser.getUsername());
 		
 		System.out.println("End");
 	}

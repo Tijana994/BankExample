@@ -38,4 +38,18 @@ public class NotificationManager {
 	{
 		return new UserNotification(name,timestamp, causedById, receiversIds, notifierId);
 	}
+	
+	@CreateNotificationAnnotation(causedByType = TargetType.PolicyStatement, type = NotificationType.STOP_PROCESSING)
+	public UserNotification notifyUserAboutStopSendingMails(String name, Date timestamp, String causedById, 
+			String receiverId, String notifierId)
+	{
+		return new UserNotification(name,timestamp, causedById, receiverId, notifierId);
+	}
+	
+	@CreateNotificationAnnotation(causedByType = TargetType.Withdraw, type = NotificationType.WITHDRAW)
+	public UserNotification notifyUserAboutWithdrawal(String name, Date timestamp, String causedById, 
+			List<String> receiversIds, String notifierId)
+	{
+		return new UserNotification(name,timestamp, causedById, receiversIds, notifierId);
+	}
 }

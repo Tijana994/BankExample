@@ -7,8 +7,10 @@ import java.util.List;
 
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnActionAnnotation;
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnDataAnnotation;
+import com.security.model.validation.annotations.creators.CreateWithdrawAnnotation;
 
 import bank.models.Complaint;
+import bank.models.Withdraw;
 import privacyModel.ComplaintBasedOnDataType;
 
 public class ComplaintManager {
@@ -44,5 +46,16 @@ public class ComplaintManager {
 		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
 		complaint.setUserId(userId);
 		return complaint;
+	}
+	
+	@CreateWithdrawAnnotation(consentId = "consentId")
+	public Withdraw createComplaintWithWithdraw(String name, String reason, String consentId, String userId)
+	{
+		var withdraw = new Withdraw();
+		withdraw.setName(name);
+		withdraw.setReason(reason);
+		withdraw.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		withdraw.setUserId(userId);
+		return withdraw;
 	}
 }
