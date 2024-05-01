@@ -44,4 +44,10 @@ public class UserManager {
 	{ 
 		return new User(username, employees, located);
 	}
+	
+	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.LEGAL_ENTITY)
+	public User createLegalEntityOut(String username)
+	{ 
+		return new User(username);
+	}
 }

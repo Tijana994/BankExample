@@ -101,6 +101,7 @@ public class BankProject {
 		complaint2.createDenial("Erasure cannot be done - need parent persmission","Still processing", complaint2.getName(),
 				bankUser.getUsername(), new ArrayList<String>(Arrays.asList(log1.getName())));
 		
+		//use case 3
 		//3.1
 		var subpurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),6,0);
 		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
@@ -126,6 +127,17 @@ public class BankProject {
 				consent2.getName(), john.getUsername());
 		bankProject.bank.getNotificationManager().notifyUserAboutWithdrawal("Notify John and Ned about withdrawal", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				complaint4.getName(), new ArrayList<String>(Arrays.asList(john.getUsername(),ned.getUsername())), bankUser.getUsername());
+		
+		//use case 4
+		//4.1
+		var bob = bankProject.bank.getUserManager().createCustomer("Bob");
+		
+		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob.getUsername(), "Novi Sad 1");
+		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				defaultPurpose, consent3.getName(), new ArrayList<String>());
+		
+		//4.2
+		var police = bankProject.bank.getUserManager().createLegalEntityOut("Police");
 		
 		System.out.println("End");
 	}
