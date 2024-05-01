@@ -46,4 +46,15 @@ public class DocumentManager {
 		document.setCreatedBy(createdByUsername);
 		return document;
 	}
+	
+	@CreateDocumentAnnotation(documentType = DocumentType.COURT_APPROVAL)
+	public Document createCourtApproval(String name, String createdByUsername, String location)
+	{
+		Document document = new Document();
+		document.setName(name);
+		document.setLocation(location);
+		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		document.setCreatedBy(createdByUsername);
+		return document;
+	}
 }

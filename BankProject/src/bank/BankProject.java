@@ -138,6 +138,17 @@ public class BankProject {
 		
 		//4.2
 		var police = bankProject.bank.getUserManager().createLegalEntityOut("Police");
+		var court = bankProject.bank.getUserManager().createLegalEntityOut("Budapest court");
+		var courtApproval = bankProject.bank.getDocumentManager().createCourtApproval("Police investigation approval - Bob", court.getUsername(), "-");
+		var from1 = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
+		var to1 = java.util.Date.from(LocalDate.of(2025, 4, 25).atStartOfDay()
+			      .atZone(ZoneId.systemDefault())
+			      .toInstant());
+		
+		var investigationPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),3,2);
+		
+		bankProject.bank.getAccountManager().policeInvestigation(bankUser, john.getUsername(), police.getUsername(), 
+				new ArrayList<String>(Arrays.asList(courtApproval.getName())),from1, to1, investigationPurpose);
 		
 		System.out.println("End");
 	}

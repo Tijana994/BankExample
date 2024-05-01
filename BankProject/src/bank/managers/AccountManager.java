@@ -72,6 +72,16 @@ public class AccountManager {
 		return log;
 	}
 	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "policeStationId", howDocumentsIds = "documentId",
+			why ="purpose", when = "start,to", actions = {Action.ACCESS}, datas = {"name" , "email", "account number", "identity number"})
+	public Log policeInvestigation(User employee, String userId, String policeStationId, ArrayList<String> documentId,
+			@TimeStatementAnnotation(preposition = TimePreposition.FROM) Date start, @TimeStatementAnnotation(preposition = TimePreposition.TO) Date to, Purpose purpose)
+	{
+		var log = new Log();
+		log.setName("Police investigation for " + userId);
+		return log;
+	}
+	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
 			why ="purpose", when = "start", actions = {Action.STOP_PROCESSING}, datas = {"email"}, causedById = "complaintId")
 	public Log stopSendingEmails(User employee, String userId,
