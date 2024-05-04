@@ -17,7 +17,7 @@ import privacyModel.TimePreposition;
 
 public class AccountManager {
 
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
 			howConsentId = "consentId", howDocumentsIds = "custodyocumentId")
 	public Log openAccount(User employee, String userId,@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
@@ -28,7 +28,7 @@ public class AccountManager {
 		return log;
 	}
 	
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId",
 			why ="purpose", when = "start", actions = {Action.ACCESS}, datas = {"account number"})
 	public Log checkAccount(User employee, String userId,
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose)
@@ -38,7 +38,7 @@ public class AccountManager {
 		return log;
 	}
 	
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
 			why ="purpose", when = "start", actions = {Action.RECTIFICATION}, datas = {"email"}, causedById = "complaintId")
 	public Log rectificationOfData(User employee, String userId,
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
@@ -62,7 +62,7 @@ public class AccountManager {
 		return log;
 	}
 	
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
 			why ="purpose", when = "start", actions = {Action.ACCESS}, datas = {"email"})
 	public Log emailSendingForCard(User employee, String userId,
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose)
@@ -82,7 +82,7 @@ public class AccountManager {
 		return log;
 	}
 	
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = Constants.Empty, 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
 			why ="purpose", when = "start", actions = {Action.STOP_PROCESSING}, datas = {"email"}, causedById = "complaintId")
 	public Log stopSendingEmails(User employee, String userId,
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
