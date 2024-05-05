@@ -56,14 +56,14 @@ public class BankProject {
 				defaultPurpose);
 		
 		//1.3
+		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Transfer consent Eve", eve.getUsername(), "system");
 		var from = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var to = java.util.Date.from(LocalDate.of(2034, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
-		var transferconsent = bankProject.bank.getDocumentManager().createConsentDocument("Transfer consent Eve", eve.getUsername(), "Novi Sad 1");
-		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Eve consent", eve.getUsername(), "system");
 		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
-				defaultPurpose, city2, city1,transferconsent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
+				defaultPurpose, city2, city1,consent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
+		
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				transferLog.getName(), eve.getUsername(), bankUser.getUsername());
