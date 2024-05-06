@@ -49,7 +49,7 @@ public class BankProject {
 		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent.getName(), new ArrayList<String>());
+				defaultPurpose, consent.getName(), "");
 		
 		//1.2
 		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -76,7 +76,7 @@ public class BankProject {
 		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
 		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
 		bankProject.bank.getAccountManager().openAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent1.getName(), new ArrayList<String>(Arrays.asList(childCustody.getName())));
+				defaultPurpose, consent1.getName(), childCustody.getName());
 		
 		//2.2
 		var log1 = bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -84,7 +84,7 @@ public class BankProject {
 		
 		//2.3
 		var complaint1 = bankProject.bank.getComplaintManager().createComplaintOnDataForRectification("Rectification of email","Change email",
-				new ArrayList<String>(Arrays.asList("email")), alice.getUsername());
+				"email", alice.getUsername());
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutRectification("Notify Alice and Green bank about rectification", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				complaint1.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
@@ -95,11 +95,11 @@ public class BankProject {
 		
 		//2.4
 		var complaint2 = bankProject.bank.getComplaintManager().createComplaintOnDataForErasure("Erasure of email - Alice","-",
-				new ArrayList<String>(Arrays.asList("email")), alice.getUsername());
+				"email", alice.getUsername());
 		bankProject.bank.getNotificationManager().notifyUserAboutErasure("Notify Alice and Green bank about erasure", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				complaint2.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
 		complaint2.createDenial("Erasure cannot be done - need parent persmission","Still processing", complaint2.getName(),
-				bankUser.getUsername(), new ArrayList<String>(Arrays.asList(log1.getName())));
+				bankUser.getUsername(), log1.getName());
 		
 		//use case 3
 		//3.1
@@ -107,7 +107,7 @@ public class BankProject {
 		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				purpose, consent2.getName(), new ArrayList<String>());
+				purpose, consent2.getName(), "");
 		
 		//3.2
 		var emailSending = bankProject.bank.getAccountManager().emailSendingForCard(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -134,7 +134,7 @@ public class BankProject {
 		
 		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent3.getName(), new ArrayList<String>());
+				defaultPurpose, consent3.getName(), "");
 		
 		//4.2
 		var police = bankProject.bank.getUserManager().createLegalEntityOut("Police");
@@ -175,19 +175,14 @@ public class BankProject {
 			add("OriginalData");
 		}});
 		
-		DataFactory.addPrivacyData("name", DataType.GENERAL);
-		DataFactory.addPrivacyData("account number", DataType.GENERAL);
-		DataFactory.addPrivacyData("identity number", DataType.BIOMETRIC);
-		DataFactory.addPrivacyData("email", DataType.GENERAL);
-		
 		var encription = new ArrayList<String>()
 		{{
 			add("Encryption");
 		}};
 		
-		DataFactory.addSharedPrivacyData("name", "name", true, "Identity document", encription);
-		DataFactory.addSharedPrivacyData("account number", "account number", true, null, null);
-		DataFactory.addSharedPrivacyData("identity number", "identity number", true, "Identity document", encription);
-		DataFactory.addSharedPrivacyData("email", "email", true, null, null);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("name", DataType.GENERAL, true, "Identity document", encription);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("account number", DataType.GENERAL, true, null, null);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("identity number", DataType.BIOMETRIC, true, "Identity document", encription);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("email", DataType.GENERAL, true, null, null);
 	}
 }

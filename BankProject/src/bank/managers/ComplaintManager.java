@@ -3,7 +3,6 @@ package bank.managers;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
-import java.util.List;
 
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnActionAnnotation;
 import com.security.model.validation.annotations.creators.CreateComplaintBasedOnDataAnnotation;
@@ -15,8 +14,8 @@ import privacyModel.ComplaintBasedOnDataType;
 
 public class ComplaintManager {
 
-	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION, subjectsIds = "datalist")
-	public Complaint createComplaintOnDataForRectification(String name, String reason, List<String> datalist, String userId)
+	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION, subjectId = "data")
+	public Complaint createComplaintOnDataForRectification(String name, String reason, String data, String userId)
 	{
 		var complaint = new Complaint();
 		complaint.setName(name);
@@ -26,8 +25,8 @@ public class ComplaintManager {
 		return complaint;
 	}
 	
-	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.ERASURE, subjectsIds = "datalist")
-	public Complaint createComplaintOnDataForErasure(String name, String reason, List<String> datalist, String userId)
+	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.ERASURE, subjectId = "data")
+	public Complaint createComplaintOnDataForErasure(String name, String reason, String data, String userId)
 	{
 		var complaint = new Complaint();
 		complaint.setName(name);

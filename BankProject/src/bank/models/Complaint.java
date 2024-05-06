@@ -1,7 +1,6 @@
 package bank.models;
 
 import java.util.Date;
-import java.util.List;
 
 import com.security.model.validation.annotations.ComplaintAnnotation;
 import com.security.model.validation.annotations.creators.CreateDenialAnnotation;
@@ -14,8 +13,8 @@ public class Complaint {
 	private Date time;
 	private String userId;
 	
-	@CreateDenialAnnotation(forComplaintId = "complaintId", approvedById = "approvedById", basedOnStatemetsIds = "tasks")
-	public Denial createDenial(String name, String reason, String complaintId, String approvedById, List<String> tasks)
+	@CreateDenialAnnotation(forComplaintId = "complaintId", approvedById = "approvedById", basedOnStatementId = "task")
+	public Denial createDenial(String name, String reason, String complaintId, String approvedById, String task)
 	{
 		var denial = new Denial();
 		denial.setName(name);
