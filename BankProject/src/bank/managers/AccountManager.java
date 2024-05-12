@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
-import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
 
 import bank.models.Location;
 import bank.models.Log;
