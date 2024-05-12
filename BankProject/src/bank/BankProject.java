@@ -49,7 +49,7 @@ public class BankProject {
 		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent.getName(), "");
+				defaultPurpose, consent.getName());
 		
 		//1.2
 		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -75,7 +75,7 @@ public class BankProject {
 				new ArrayList<User>(Arrays.asList(john)));
 		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
 		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
-		bankProject.bank.getAccountManager().openAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		bankProject.bank.getAccountManager().openAccountChild(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent1.getName(), childCustody.getName());
 		
 		//2.2
@@ -107,7 +107,7 @@ public class BankProject {
 		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				purpose, consent2.getName(), "");
+				purpose, consent2.getName());
 		
 		//3.2
 		var emailSending = bankProject.bank.getAccountManager().emailSendingForCard(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -134,7 +134,7 @@ public class BankProject {
 		
 		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent3.getName(), "");
+				defaultPurpose, consent3.getName());
 		
 		//4.2
 		var police = bankProject.bank.getUserManager().createLegalEntityOut("Police");

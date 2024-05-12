@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
+import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
 
 import bank.models.Location;
 import bank.models.Log;
@@ -18,8 +19,19 @@ public class AccountManager {
 
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
-			howConsentId = "consentId", howDocumentId = "custodyDocumentId")
+			howConsentId = "consentId")
 	public Log openAccount(User employee, String userId,@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
+			Purpose purpose, String consentId)
+	{
+		var log = new Log();
+		log.setName("Open account for " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
+			howConsentId = "consentId", howDocumentId = "custodyDocumentId")
+	public Log openAccountChild(User employee, String userId,@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
 			Purpose purpose, String consentId, String custodyDocumentId)
 	{
 		var log = new Log();
