@@ -16,8 +16,16 @@ public class LocationManager {
 		return l;
 	}
 	
-	@CreateLocationAnnotation(locationType = LocationType.COUNTRY)
+	@CreateLocationAnnotation(locationType = LocationType.COUNTRY, isEUMember = true)
 	public Location createCountry(String name)
+	{
+		var l =  new Location();
+		l.setName(name);
+		return l;
+	}
+	
+	@CreateLocationAnnotation(locationType = LocationType.COUNTRY, isEUMember = false, legalAgeLimit = 18)
+	public Location createNonEUCountry(String name)
 	{
 		var l =  new Location();
 		l.setName(name);

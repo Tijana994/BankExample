@@ -29,7 +29,7 @@ public class BankProject {
 		
 		BankProject bankProject = new BankProject();
 		var locationHelper = new LocationManager();
-		locationHelper.createCountry("Serbia");
+		locationHelper.createNonEUCountry("Serbia");
 		var city1 = locationHelper.createCity("Novi Sad", "Serbia");
 		locationHelper.createCountry("Hungary");
 		var city2 = locationHelper.createCity("Budapest", "Hungary");
