@@ -4,18 +4,27 @@ import java.util.Date;
 
 import com.security.model.validation.annotations.WithdrawAnnotation;
 
-@WithdrawAnnotation(id="name", when = "time", reason = "reason", whoId = "userId")
-public class Withdraw {
+import bank.models.users.User;
 
-	private String name;
-	private Date time;
-	private String reason;
-	private String userId;
-	public String getName() {
-		return name;
+@WithdrawAnnotation(id="withdrawId", when = "time", reason = "explanation", who = "client")
+public class Withdraw {
+	public Withdraw(String withdrawId, Date time, String explanation, User client) {
+		super();
+		this.withdrawId = withdrawId;
+		this.time = time;
+		this.explanation = explanation;
+		this.client = client;
 	}
-	public void setName(String name) {
-		this.name = name;
+	private String withdrawId;
+	private Date time;
+	private String explanation;
+	private User client;
+	
+	public String getWithdrawId() {
+		return withdrawId;
+	}
+	public void setWithdrawId(String withdrawId) {
+		this.withdrawId = withdrawId;
 	}
 	public Date getTime() {
 		return time;
@@ -23,16 +32,16 @@ public class Withdraw {
 	public void setTime(Date time) {
 		this.time = time;
 	}
-	public String getUserId() {
-		return userId;
+	public String getExplanation() {
+		return explanation;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
-	public String getReason() {
-		return reason;
+	public User getClient() {
+		return client;
 	}
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setClient(User client) {
+		this.client = client;
 	}
 }

@@ -1,19 +1,17 @@
 package bank.models;
 
+
 import com.security.model.validation.annotations.PolicyStatementAnnotation;
 
-@PolicyStatementAnnotation(id = "name")
+@PolicyStatementAnnotation(id = "logId")
 public class Log {
 
-	private String name;
-	public Log()
-	{
-		setName("Some generic name");
+	private String logId;
+
+	public String getLogId() {
+		return logId;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setLogId(String logId) {
+		this.logId = logId;
 	}
 }

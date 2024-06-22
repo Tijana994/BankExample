@@ -23,7 +23,7 @@ public class AccountManager {
 			Purpose purpose, String consentId)
 	{
 		var log = new Log();
-		log.setName("Open account for " + userId);
+		log.setLogId("Open account for " + userId);
 		return log;
 	}
 	
@@ -34,7 +34,7 @@ public class AccountManager {
 			Purpose purpose, String consentId, String custodyDocumentId)
 	{
 		var log = new Log();
-		log.setName("Open account for " + userId);
+		log.setLogId("Open account for " + userId);
 		return log;
 	}
 	
@@ -44,7 +44,7 @@ public class AccountManager {
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose)
 	{
 		var log = new Log();
-		log.setName("Check account for " + userId);
+		log.setLogId("Check account for " + userId);
 		return log;
 	}
 	
@@ -54,7 +54,7 @@ public class AccountManager {
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
 	{
 		var log = new Log();
-		log.setName("Data rectification for " + userId);
+		log.setLogId("Data rectification for " + userId);
 		return log;
 	}
 	
@@ -68,7 +68,7 @@ public class AccountManager {
 			Location locationSource, Location locationDestination, String consentId, ArrayList<String> transferDocumentId)
 	{
 		var log = new Log();
-		log.setName("Transfer account for " + userId);
+		log.setLogId("Transfer account for " + userId);
 		return log;
 	}
 	
@@ -78,7 +78,7 @@ public class AccountManager {
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose)
 	{
 		var log = new Log();
-		log.setName("Email sending for new credit card to " + userId);
+		log.setLogId("Email sending for new credit card to " + userId);
 		return log;
 	}
 	
@@ -88,7 +88,7 @@ public class AccountManager {
 			@TimeStatementAnnotation(preposition = TimePreposition.FROM) Date start, @TimeStatementAnnotation(preposition = TimePreposition.TO) Date to, Purpose purpose)
 	{
 		var log = new Log();
-		log.setName("Police investigation for " + userId);
+		log.setLogId("Police investigation for " + userId);
 		return log;
 	}
 	
@@ -98,7 +98,7 @@ public class AccountManager {
 			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
 	{
 		var log = new Log();
-		log.setName("Stop sending mails to " + userId);
+		log.setLogId("Stop sending mails to " + userId);
 		return log;
 	}
 

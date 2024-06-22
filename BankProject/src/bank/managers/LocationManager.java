@@ -8,28 +8,21 @@ import privacyModel.LocationType;
 public class LocationManager {
 	
 	@CreateLocationAnnotation(locationType = LocationType.REGION)
-	public Location createCity(String name, String parentId)
+	public Location createCity(String name, Location region)
 	{
-		var l =  new Location();
-		l.setName(name);
-		l.setParentId(parentId);
-		return l;
+		return  new Location(name, region);
 	}
 	
 	@CreateLocationAnnotation(locationType = LocationType.COUNTRY, isEUMember = true)
 	public Location createCountry(String name)
 	{
-		var l =  new Location();
-		l.setName(name);
-		return l;
+		return  new Location(name);
 	}
 	
 	@CreateLocationAnnotation(locationType = LocationType.COUNTRY, isEUMember = false, legalAgeLimit = 18)
 	public Location createNonEUCountry(String name)
 	{
-		var l =  new Location();
-		l.setName(name);
-		return l;
+		return  new Location(name);
 	}
 
 }

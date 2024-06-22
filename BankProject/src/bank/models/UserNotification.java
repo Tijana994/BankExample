@@ -6,41 +6,38 @@ import java.util.List;
 
 import com.security.model.validation.annotations.NotificationAnnotation;
 
+import bank.models.users.User;
+
 @NotificationAnnotation(id = "id", when ="timestamp", causedById = "causedById", 
-receiversIds = "receiversIds", notifiersIds = "notifiersIds")
+receivers = "receivers", notifiers = "notifiers")
 public class UserNotification {
 	
-	public UserNotification(String id, Date timestamp, String causedById, String receiverId, String notifierId) {
+	public UserNotification(String id, Date timestamp, String causedById, User receiver, User notifier) {
 		super();
 		this.id = id;
 		this.timestamp = timestamp;
 		this.causedById = causedById;
-		this.receiverId = receiverId;
-		this.receiversIds = new ArrayList<String>();
-		this.receiversIds.add(receiverId);
-		this.notifierId = notifierId;
-		this.notifiersIds = new ArrayList<String>();
-		notifiersIds.add(notifierId);
+		this.receivers = new ArrayList<User>();
+		this.receivers.add(receiver);
+		this.notifiers = new ArrayList<User>();
+		this.notifiers.add(notifier);
 	}
 	
-	public UserNotification(String id, Date timestamp, String causedById, List<String> receiversIds, String notifierId) {
+	public UserNotification(String id, Date timestamp, String causedById, List<User> receivers, User notifier) {
 		super();
 		this.id = id;
 		this.timestamp = timestamp;
 		this.causedById = causedById;
-		this.receiversIds = receiversIds;
-		this.notifierId = notifierId;
-		this.notifiersIds = new ArrayList<String>();
-		notifiersIds.add(notifierId);
+		this.receivers = receivers;
+		this.notifiers = new ArrayList<User>();
+		this.notifiers.add(notifier);
 	}
 	
 	private String id;
 	private Date timestamp;
 	private String causedById;
-	private String receiverId;
-	private List<String> receiversIds;
-	private String notifierId;
-	private List<String> notifiersIds;
+	private List<User> receivers;
+	private List<User> notifiers;
 	public String getId() {
 		return id;
 	}
@@ -55,14 +52,5 @@ public class UserNotification {
 	}
 	public String getCausedById() {
 		return causedById;
-	}
-	public String getReceiverId() {
-		return receiverId;
-	}
-	public String getNotifierId() {
-		return notifierId;
-	}
-	public List<String> getNotifiersIds() {
-		return notifiersIds;
 	}
 }

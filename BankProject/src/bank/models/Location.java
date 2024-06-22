@@ -2,11 +2,20 @@ package bank.models;
 
 import com.security.model.validation.annotations.LocationAnnotation;
 
-@LocationAnnotation(id = "name", parentId ="parentId")
+@LocationAnnotation(id = "name", parent ="region")
 public class Location {
+	
+	public Location(String name){
+		this.name = name;
+	}
+
+	public Location(String name, Location region) {
+		this(name);
+		this.region = region;
+	}
 
 	private String name;
-	private String parentId;
+	private Location region;
 
 	public String getName() {
 		return name;
@@ -16,11 +25,11 @@ public class Location {
 		this.name = name;
 	}
 
-	public String getParentId() {
-		return parentId;
+	public Location getRegion() {
+		return region;
 	}
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
+	public void setRegion(Location region) {
+		this.region = region;
 	}
 }

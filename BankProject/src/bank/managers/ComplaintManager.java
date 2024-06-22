@@ -34,13 +34,8 @@ public class ComplaintManager {
 	}
 	
 	@CreateWithdrawAnnotation(consentId = "consentId")
-	public Withdraw createComplaintWithWithdraw(String name, String reason, String consentId, String userId)
+	public Withdraw createComplaintWithWithdraw(String withdrawId, String explanation, String consentId, User client)
 	{
-		var withdraw = new Withdraw();
-		withdraw.setName(name);
-		withdraw.setReason(reason);
-		withdraw.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		withdraw.setUserId(userId);
-		return withdraw;
+		return new Withdraw(withdrawId, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), explanation, client);
 	}
 }

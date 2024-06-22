@@ -30,10 +30,10 @@ public class BankProject {
 		
 		BankProject bankProject = new BankProject();
 		var locationHelper = new LocationManager();
-		locationHelper.createNonEUCountry("Serbia");
-		var city1 = locationHelper.createCity("Novi Sad", "Serbia");
-		locationHelper.createCountry("Hungary");
-		var city2 = locationHelper.createCity("Budapest", "Hungary");
+		var serbia = locationHelper.createNonEUCountry("Serbia");
+		var city1 = locationHelper.createCity("Novi Sad", serbia);
+		var hungary = locationHelper.createCountry("Hungary");
+		var city2 = locationHelper.createCity("Budapest", hungary);
 		var employees = new ArrayList<User>();
 		var ned = bankProject.bank.getUserManager().createEmployee("Ned - bank", LocalDate.of(1990, 4, 10));
 		employees.add(ned);
@@ -67,7 +67,7 @@ public class BankProject {
 		
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				transferLog.getName(), eve.getUsername(), bankUser.getUsername());
+				transferLog.getLogId(), eve, bankUser);
 		
 		//use case 2
 		//2.1
@@ -88,19 +88,19 @@ public class BankProject {
 				"email", alice);
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutRectification("Notify Alice and Green bank about rectification", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				complaint1.getComplaintId(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
+				complaint1.getComplaintId(), new ArrayList<User>(Arrays.asList(alice, bankUser)), bankUser);
 		var rectification = bankProject.bank.getAccountManager().rectificationOfData(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, complaint1.getComplaintId());
 		bankProject.bank.getNotificationManager().notifyUserAboutExecutedRectification("Notify Alice about rectified email", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				rectification.getName(), alice.getUsername(), bankUser.getUsername());
+				rectification.getLogId(), alice, bankUser);
 		
 		//2.4
 		var complaint2 = bankProject.bank.getComplaintManager().createComplaintOnDataForErasure("Erasure of email - Alice","-",
 				"email", alice);
 		bankProject.bank.getNotificationManager().notifyUserAboutErasure("Notify Alice and Green bank about erasure", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				complaint2.getComplaintId(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
+				complaint2.getComplaintId(), new ArrayList<User>(Arrays.asList(alice, bankUser)), bankUser);
 		complaint2.createDenial("Erasure cannot be done - need parent persmission","Still processing", complaint2.getComplaintId(),
-				bankUser.getUsername(), log1.getName());
+				bankUser.getUsername(), log1.getLogId());
 		
 		//use case 3
 		//3.1
@@ -116,18 +116,18 @@ public class BankProject {
 		
 		//3.3
 		var complaint3 = bankProject.bank.getComplaintManager().createComplaintOnAction("Stop sending emails in marketing purpose","-",
-				emailSending.getName(), john);
+				emailSending.getLogId(), john);
 		var stopProcessing = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),11,0);
 		var stopSending = bankProject.bank.getAccountManager().stopSendingEmails(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				stopProcessing, complaint3.getComplaintId());
 		bankProject.bank.getNotificationManager().notifyUserAboutStopSendingMails("Notify John about stop sending mails", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				stopSending.getName(), john.getUsername(), bankUser.getUsername());
+				stopSending.getLogId(), john, bankUser);
 		
 		//3.4
 		var complaint4 = bankProject.bank.getComplaintManager().createComplaintWithWithdraw("John consent withdrawal", "Changing bank", 
-				consent2.getDocumentId(), john.getUsername());
+				consent2.getDocumentId(), john);
 		bankProject.bank.getNotificationManager().notifyUserAboutWithdrawal("Notify John and Ned about withdrawal", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				complaint4.getName(), new ArrayList<String>(Arrays.asList(john.getUsername(),ned.getUsername())), bankUser.getUsername());
+				complaint4.getWithdrawId(), new ArrayList<User>(Arrays.asList(john, ned)), bankUser);
 		
 		//use case 4
 		//4.1
