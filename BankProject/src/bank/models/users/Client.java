@@ -1,10 +1,10 @@
-package bank.models;
+package bank.models.users;
 
 import java.util.Date;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "birthday", childrens = "subUsers", inhabits = "location")
+@PrincipalAnnotation(id = "username", birthday = "birthday")
 public class Client extends User {
 	
 	private Date birthday;

@@ -10,6 +10,7 @@ import java.util.Date;
 
 import bank.managers.LocationManager;
 import bank.models.*;
+import bank.models.users.User;
 import privacyModel.DataType;
 import utility.PrivacyDataFactory.DataFactory;
 import utility.ProjectConfiguration.Configuration;

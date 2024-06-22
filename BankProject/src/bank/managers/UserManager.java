@@ -7,11 +7,12 @@ import java.util.List;
 
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 
-import bank.models.Client;
-import bank.models.Employee;
 import bank.models.Location;
-import bank.models.MinorClient;
-import bank.models.User;
+import bank.models.users.Bank;
+import bank.models.users.Client;
+import bank.models.users.Employee;
+import bank.models.users.MinorClient;
+import bank.models.users.User;
 import privacyModel.PrincipalScope;
 import privacyModel.PrincipalType;
 
@@ -44,12 +45,12 @@ public class UserManager {
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)
 	public User createLegalEntity(String username, ArrayList<User> employees, Location located)
 	{ 
-		return new User(username, employees, located);
+		return new Bank(username, employees, located);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.LEGAL_ENTITY)
 	public User createLegalEntityOut(String username)
 	{ 
-		return new User(username);
+		return new Bank(username);
 	}
 }

@@ -1,4 +1,4 @@
-package bank.models;
+package bank.models.users;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "birthday", responsiblePersons = "responsiblePersons", childrens = "subUsers", inhabits = "location" )
+@PrincipalAnnotation(id = "username", birthday = "birthday", responsiblePersons = "responsiblePersons")
 public class MinorClient extends Client {
 
 	public MinorClient(String username, Date birthday, List<User> responsiblePersons) {

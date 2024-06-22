@@ -10,7 +10,7 @@ import com.security.model.validation.annotations.creators.CreatePolicyStatementA
 import bank.models.Location;
 import bank.models.Log;
 import bank.models.Purpose;
-import bank.models.User;
+import bank.models.users.User;
 import privacyModel.Action;
 import privacyModel.TimePreposition;
 
