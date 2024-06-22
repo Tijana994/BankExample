@@ -2,7 +2,7 @@ package bank.models;
 
 import bank.managers.*;
 
-public class Bank {
+public class BankUtility {
 	
 	private UserManager userManager;
 	private DocumentManager documentManager;
@@ -10,7 +10,7 @@ public class Bank {
 	private AccountManager accountManager;
 	private NotificationManager notificationManager;
 	
-	public Bank()
+	public BankUtility()
 	{
 		this.userManager = new UserManager();
 		this.documentManager = new DocumentManager();

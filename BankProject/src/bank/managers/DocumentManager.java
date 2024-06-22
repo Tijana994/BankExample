@@ -8,6 +8,7 @@ import com.security.model.validation.annotations.creators.CreateConsentAnnotatio
 import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
 
 import bank.models.Document;
+import bank.models.users.User;
 import privacyModel.ConsentFormat;
 import privacyModel.ConsentType;
 import privacyModel.DocumentType;
@@ -15,46 +16,26 @@ import privacyModel.DocumentType;
 public class DocumentManager {
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
-	public Document createChildCustodyDocument(String name, String createdByUsername, String location)
+	public Document createChildCustodyDocument(String documentId, User createdBy, String physicalLocation)
 	{
-		Document document = new Document();
-		document.setName(name);
-		document.setLocation(location);
-		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		document.setCreatedBy(createdByUsername);
-		return document;
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
-	public Document createConsentDocument(String name, String createdByUsername, String location)
+	public Document createConsentDocument(String documentId, User createdBy, String physicalLocation)
 	{
-		Document document = new Document();
-		document.setName(name);
-		document.setLocation(location);
-		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		document.setCreatedBy(createdByUsername);
-		return document;
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.TRANSFER_CERTIFICATE)
-	public Document createTransferDocument(String name, String createdByUsername, String location)
+	public Document createTransferDocument(String documentId, User createdBy, String physicalLocation)
 	{
-		Document document = new Document();
-		document.setName(name);
-		document.setLocation(location);
-		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		document.setCreatedBy(createdByUsername);
-		return document;
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.COURT_APPROVAL)
-	public Document createCourtApproval(String name, String createdByUsername, String location)
+	public Document createCourtApproval(String documentId, User createdBy, String physicalLocation)
 	{
-		Document document = new Document();
-		document.setName(name);
-		document.setLocation(location);
-		document.setStartDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		document.setCreatedBy(createdByUsername);
-		return document;
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 }

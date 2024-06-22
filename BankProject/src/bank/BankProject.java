@@ -17,11 +17,11 @@ import utility.ProjectConfiguration.Configuration;
 
 public class BankProject {
 
-	private Bank bank;
+	private BankUtility bank;
 	
 	public BankProject()
 	{
-		bank = new Bank();
+		bank = new BankUtility();
 	}
 	
 	public static void main(String[] args) {
@@ -48,22 +48,22 @@ public class BankProject {
 		//1.1
 		var eve = bankProject.bank.getUserManager().createClient("Eve");
 		
-		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
+		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve, "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent.getName());
+				defaultPurpose, consent.getDocumentId());
 		
 		//1.2
 		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose);
 		
 		//1.3
-		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Transfer consent Eve", eve.getUsername(), "system");
+		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Transfer consent Eve", eve, "system");
 		var from = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var to = java.util.Date.from(LocalDate.of(2034, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
 		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
-				defaultPurpose, city2, city1,consent.getName(), new ArrayList<String>(Arrays.asList(transferDocument.getName())));
+				defaultPurpose, city2, city1, consent.getDocumentId(), new ArrayList<String>(Arrays.asList(transferDocument.getDocumentId())));
 		
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutTransfer("Notify Eve about transfer", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -74,10 +74,10 @@ public class BankProject {
 		var john = bankProject.bank.getUserManager().createClient("John");
 		var alice = bankProject.bank.getUserManager().createMinorClient("Alice", LocalDate.of(2010, 4, 10), 
 				new ArrayList<User>(Arrays.asList(john)));
-		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
-		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
+		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john, "Novi Sad 1");
+		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john, "System");
 		bankProject.bank.getAccountManager().openAccountChild(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent1.getName(), childCustody.getName());
+				defaultPurpose, consent1.getDocumentId(), childCustody.getDocumentId());
 		
 		//2.2
 		var log1 = bankProject.bank.getAccountManager().checkAccount(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -85,30 +85,30 @@ public class BankProject {
 		
 		//2.3
 		var complaint1 = bankProject.bank.getComplaintManager().createComplaintOnDataForRectification("Rectification of email","Change email",
-				"email", alice.getUsername());
+				"email", alice);
 		
 		bankProject.bank.getNotificationManager().notifyUserAboutRectification("Notify Alice and Green bank about rectification", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				complaint1.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
+				complaint1.getComplaintId(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
 		var rectification = bankProject.bank.getAccountManager().rectificationOfData(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, complaint1.getName());
+				defaultPurpose, complaint1.getComplaintId());
 		bankProject.bank.getNotificationManager().notifyUserAboutExecutedRectification("Notify Alice about rectified email", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				rectification.getName(), alice.getUsername(), bankUser.getUsername());
 		
 		//2.4
 		var complaint2 = bankProject.bank.getComplaintManager().createComplaintOnDataForErasure("Erasure of email - Alice","-",
-				"email", alice.getUsername());
+				"email", alice);
 		bankProject.bank.getNotificationManager().notifyUserAboutErasure("Notify Alice and Green bank about erasure", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				complaint2.getName(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
-		complaint2.createDenial("Erasure cannot be done - need parent persmission","Still processing", complaint2.getName(),
+				complaint2.getComplaintId(), new ArrayList<String>(Arrays.asList(alice.getUsername(),bankUser.getUsername())), bankUser.getUsername());
+		complaint2.createDenial("Erasure cannot be done - need parent persmission","Still processing", complaint2.getComplaintId(),
 				bankUser.getUsername(), log1.getName());
 		
 		//use case 3
 		//3.1
 		var subpurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),6,0);
 		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
-		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
+		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john, "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				purpose, consent2.getName());
+				purpose, consent2.getDocumentId());
 		
 		//3.2
 		var emailSending = bankProject.bank.getAccountManager().emailSendingForCard(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -116,16 +116,16 @@ public class BankProject {
 		
 		//3.3
 		var complaint3 = bankProject.bank.getComplaintManager().createComplaintOnAction("Stop sending emails in marketing purpose","-",
-				emailSending.getName(), john.getUsername());
+				emailSending.getName(), john);
 		var stopProcessing = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),11,0);
 		var stopSending = bankProject.bank.getAccountManager().stopSendingEmails(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				stopProcessing, complaint3.getName());
+				stopProcessing, complaint3.getComplaintId());
 		bankProject.bank.getNotificationManager().notifyUserAboutStopSendingMails("Notify John about stop sending mails", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				stopSending.getName(), john.getUsername(), bankUser.getUsername());
 		
 		//3.4
-		var complaint4 = bankProject.bank.getComplaintManager().createComplaintWithWithdraw("John consent withdrawal", "Chaninging bank", 
-				consent2.getName(), john.getUsername());
+		var complaint4 = bankProject.bank.getComplaintManager().createComplaintWithWithdraw("John consent withdrawal", "Changing bank", 
+				consent2.getDocumentId(), john.getUsername());
 		bankProject.bank.getNotificationManager().notifyUserAboutWithdrawal("Notify John and Ned about withdrawal", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				complaint4.getName(), new ArrayList<String>(Arrays.asList(john.getUsername(),ned.getUsername())), bankUser.getUsername());
 		
@@ -133,14 +133,14 @@ public class BankProject {
 		//4.1
 		var bob = bankProject.bank.getUserManager().createClient("Bob");
 		
-		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob.getUsername(), "Novi Sad 1");
+		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob, "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent3.getName());
+				defaultPurpose, consent3.getDocumentId());
 		
 		//4.2
 		var police = bankProject.bank.getUserManager().createLegalEntityOut("Police");
 		var court = bankProject.bank.getUserManager().createLegalEntityOut("Budapest court");
-		var courtApproval = bankProject.bank.getDocumentManager().createCourtApproval("Police investigation approval - Bob", court.getUsername(), "-");
+		var courtApproval = bankProject.bank.getDocumentManager().createCourtApproval("Police investigation approval - Bob", court, "-");
 		var from1 = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var to1 = java.util.Date.from(LocalDate.of(2025, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
@@ -149,7 +149,7 @@ public class BankProject {
 		var investigationPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),3,2);
 		
 		bankProject.bank.getAccountManager().policeInvestigation(bankUser, john.getUsername(), police.getUsername(), 
-				new ArrayList<String>(Arrays.asList(courtApproval.getName())),from1, to1, investigationPurpose);
+				new ArrayList<String>(Arrays.asList(courtApproval.getDocumentId())),from1, to1, investigationPurpose);
 		
 		System.out.println("End");
 	}

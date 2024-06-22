@@ -1,42 +1,49 @@
 package bank.models;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 import com.security.model.validation.annotations.ComplaintAnnotation;
 import com.security.model.validation.annotations.creators.CreateDenialAnnotation;
 
-@ComplaintAnnotation(id="name", reason = "reason", when = "time", whoId = "userId")
+import bank.models.users.User;
+
+@ComplaintAnnotation(id="complaintId", reason = "explanation", when = "time", who = "client")
 public class Complaint {
 
-	private String name;
-	private String reason;
+	public Complaint(String complaintId, String explanation, Date time, User client) {
+		this.complaintId = complaintId;
+		this.explanation = explanation;
+		this.time = time;
+		this.client = client;
+	}
+
+	private String complaintId;
+	private String explanation;
 	private Date time;
-	private String userId;
+	private User client;
 	
 	@CreateDenialAnnotation(forComplaintId = "complaintId", approvedById = "approvedById", basedOnStatementId = "task")
-	public Denial createDenial(String name, String reason, String complaintId, String approvedById, String task)
+	public Denial createDenial(String denialId, String explanation, String complaintId, String approvedById, String task)
 	{
-		var denial = new Denial();
-		denial.setName(name);
-		denial.setReason(reason);
-		denial.setDate(new Date());
-		return denial;
+		return new Denial(denialId, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), explanation);
 	}
 
-	public String getName() {
-		return name;
+	public String getComplaintId() {
+		return complaintId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setComplaintId(String complaintId) {
+		this.complaintId = complaintId;
 	}
 
-	public String getReason() {
-		return reason;
+	public String getExplanation() {
+		return explanation;
 	}
 
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 
 	public Date getTime() {
@@ -47,11 +54,11 @@ public class Complaint {
 		this.time = time;
 	}
 	
-	public String getUserId() {
-		return userId;
+	public User getClient() {
+		return client;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setClient(User client) {
+		this.client = client;
 	}
 }

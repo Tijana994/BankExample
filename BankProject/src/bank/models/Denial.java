@@ -4,17 +4,22 @@ import java.util.Date;
 
 import com.security.model.validation.annotations.DenialAnnotation;
 
-@DenialAnnotation(id = "name", when="date", reason="reason")
+@DenialAnnotation(id="denialId", when="date", reason="explanation")
 public class Denial {
 
-	private String name;
-	private Date date;
-	private String reason;
-	public String getName() {
-		return name;
+	public Denial(String denialId, Date date, String explanation) {
+		this.denialId = denialId;
+		this.date = date;
+		this.explanation = explanation;
 	}
-	public void setName(String name) {
-		this.name = name;
+	private String denialId;
+	private Date date;
+	private String explanation;
+	public String getDenialId() {
+		return denialId;
+	}
+	public void setDenialId(String denialId) {
+		this.denialId = denialId;
 	}
 	public Date getDate() {
 		return date;
@@ -22,10 +27,10 @@ public class Denial {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getReason() {
-		return reason;
+	public String getExplanation() {
+		return explanation;
 	}
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 }

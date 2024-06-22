@@ -10,41 +10,27 @@ import com.security.model.validation.annotations.creators.CreateWithdrawAnnotati
 
 import bank.models.Complaint;
 import bank.models.Withdraw;
+import bank.models.users.User;
 import privacyModel.ComplaintBasedOnDataType;
 
 public class ComplaintManager {
 
 	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.RECTIFICATION, subjectId = "data")
-	public Complaint createComplaintOnDataForRectification(String name, String reason, String data, String userId)
+	public Complaint createComplaintOnDataForRectification(String complaintId, String explanation, String data, User client)
 	{
-		var complaint = new Complaint();
-		complaint.setName(name);
-		complaint.setReason(reason);
-		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		complaint.setUserId(userId);
-		return complaint;
+		return new Complaint(complaintId, explanation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), client);
 	}
 	
 	@CreateComplaintBasedOnDataAnnotation(type = ComplaintBasedOnDataType.ERASURE, subjectId = "data")
-	public Complaint createComplaintOnDataForErasure(String name, String reason, String data, String userId)
+	public Complaint createComplaintOnDataForErasure(String complaintId, String explanation, String data, User client)
 	{
-		var complaint = new Complaint();
-		complaint.setName(name);
-		complaint.setReason(reason);
-		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		complaint.setUserId(userId);
-		return complaint;
+		return new Complaint(complaintId, explanation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), client);
 	}
 	
 	@CreateComplaintBasedOnActionAnnotation(policyStatementId = "actionId")
-	public Complaint createComplaintOnAction(String name, String reason, String actionId, String userId)
+	public Complaint createComplaintOnAction(String complaintId, String explanation, String actionId, User client)
 	{
-		var complaint = new Complaint();
-		complaint.setName(name);
-		complaint.setReason(reason);
-		complaint.setTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
-		complaint.setUserId(userId);
-		return complaint;
+		return new Complaint(complaintId, explanation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), client);
 	}
 	
 	@CreateWithdrawAnnotation(consentId = "consentId")

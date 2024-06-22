@@ -19,7 +19,7 @@ import privacyModel.PrincipalType;
 public class UserManager {
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON, shouldSetBirtday = true)
-	public User createEmployee(String username, LocalDate birthday)
+	public Employee createEmployee(String username, LocalDate birthday)
 	{
 		var date = java.util.Date.from(birthday.atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
@@ -28,7 +28,7 @@ public class UserManager {
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, isLegalAge = true)
-	public User createClient(String username)
+	public Client createClient(String username)
 	{
 		return new Client(username);
 	}
@@ -43,13 +43,13 @@ public class UserManager {
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)
-	public User createLegalEntity(String username, ArrayList<User> employees, Location located)
+	public Bank createLegalEntity(String username, ArrayList<User> employees, Location located)
 	{ 
 		return new Bank(username, employees, located);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.LEGAL_ENTITY)
-	public User createLegalEntityOut(String username)
+	public Bank createLegalEntityOut(String username)
 	{ 
 		return new Bank(username);
 	}
