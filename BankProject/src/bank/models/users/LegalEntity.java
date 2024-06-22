@@ -8,20 +8,20 @@ import com.security.model.validation.annotations.PrincipalAnnotation;
 import bank.models.Location;
 
 @PrincipalAnnotation(id = "username", childrens = "subUsers", inhabits = "location")
-public class Bank extends User{
+public class LegalEntity extends User{
 	
 	private List<User> subUsers = new ArrayList<User>();
 	private Location location = null;
 
-	public Bank(String username) {
+	public LegalEntity(String username) {
 		super(username);
 	}
 	
-	public Bank(String username, List<User> subUsers, Location location){
+	public LegalEntity(String username, List<User> subUsers, Location location){
 		this(username,subUsers);
 		this.location = location;
 	}
-	public Bank(String username, List<User> subUsers){
+	public LegalEntity(String username, List<User> subUsers){
 		this(username);
 		this.subUsers = subUsers;
 	}
