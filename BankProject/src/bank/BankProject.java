@@ -45,7 +45,7 @@ public class BankProject {
 		
 		//use case 1
 		//1.1
-		var eve = bankProject.bank.getUserManager().createCustomer("Eve");
+		var eve = bankProject.bank.getUserManager().createClient("Eve");
 		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -70,8 +70,8 @@ public class BankProject {
 		
 		//use case 2
 		//2.1
-		var john = bankProject.bank.getUserManager().createCustomer("John");
-		var alice = bankProject.bank.getUserManager().createMinorCustomer("Alice", LocalDate.of(2010, 4, 10), 
+		var john = bankProject.bank.getUserManager().createClient("John");
+		var alice = bankProject.bank.getUserManager().createMinorClient("Alice", LocalDate.of(2010, 4, 10), 
 				new ArrayList<User>(Arrays.asList(john)));
 		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
 		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
@@ -130,7 +130,7 @@ public class BankProject {
 		
 		//use case 4
 		//4.1
-		var bob = bankProject.bank.getUserManager().createCustomer("Bob");
+		var bob = bankProject.bank.getUserManager().createClient("Bob");
 		
 		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 

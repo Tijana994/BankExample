@@ -7,8 +7,10 @@ import java.util.List;
 
 import com.security.model.validation.annotations.creators.CreatePrincipalAnnotation;
 
+import bank.models.Client;
+import bank.models.Employee;
 import bank.models.Location;
-import bank.models.MinorUser;
+import bank.models.MinorClient;
 import bank.models.User;
 import privacyModel.PrincipalScope;
 import privacyModel.PrincipalType;
@@ -21,22 +23,22 @@ public class UserManager {
 		var date = java.util.Date.from(birthday.atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
-		return new User(username, date);
+		return new Employee(username, date);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, isLegalAge = true)
-	public User createCustomer(String username)
+	public User createClient(String username)
 	{
-		return new User(username);
+		return new Client(username);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, shouldSetBirtday = true)
-	public MinorUser createMinorCustomer(String username, LocalDate birthday, List<User> responsiblePersons)
+	public MinorClient createMinorClient(String username, LocalDate birthday, List<User> responsiblePersons)
 	{
 		var date = java.util.Date.from(birthday.atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
-		return new MinorUser(username, date, responsiblePersons);
+		return new MinorClient(username, date, responsiblePersons);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.LEGAL_ENTITY, shouldSetLocation = true)
