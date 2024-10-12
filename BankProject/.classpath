@@ -7,7 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/temda.jar"/>
-	<classpathentry kind="lib" path="lib/privacyModel.jar"/>
 	<classpathentry kind="lib" path="lib/java21/aspectjrt-1.9.20.1.jar"/>
 	<classpathentry kind="lib" path="lib/java21/aspectjtools-1.9.20.1.jar"/>
 	<classpathentry kind="lib" path="lib/java21/aspectjweaver-1.9.20.1.jar"/>
