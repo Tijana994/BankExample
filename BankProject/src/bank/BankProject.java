@@ -49,7 +49,7 @@ public class BankProject {
 		var eve = bankProject.bank.getUserManager().createClient("Eve");
 		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve, "Novi Sad 1");
-		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent.getDocumentId());
 		
 		//1.2
@@ -76,7 +76,7 @@ public class BankProject {
 				new ArrayList<User>(Arrays.asList(john)));
 		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john, "Novi Sad 1");
 		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john, "System");
-		bankProject.bank.getAccountManager().openAccountChild(ned, alice.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		bankProject.bank.getAccountManager().openAccountChild(ned, alice.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent1.getDocumentId(), childCustody.getDocumentId());
 		
 		//2.2
@@ -107,7 +107,7 @@ public class BankProject {
 		var subpurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),6,0);
 		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john, "Novi Sad 1");
-		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				purpose, consent2.getDocumentId());
 		
 		//3.2
@@ -134,7 +134,7 @@ public class BankProject {
 		var bob = bankProject.bank.getUserManager().createClient("Bob");
 		
 		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob, "Novi Sad 1");
-		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent3.getDocumentId());
 		
 		//4.2
@@ -156,7 +156,7 @@ public class BankProject {
 
 	@SuppressWarnings("serial")
 	private static void setUpConfiguration() {
-		Configuration.setXmlPath("model/bank.xmi");
+		Configuration.setXmlPath("model/bankTest.xmi");
 		Configuration.createDefaultConfiguration();
 		Configuration.setPrivacyPolicyName("Bank example");
 		Configuration.setDataSources(new ArrayList<String>()

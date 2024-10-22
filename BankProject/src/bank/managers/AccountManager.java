@@ -16,10 +16,10 @@ import privacyModel.TimePreposition;
 
 public class AccountManager {
 
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
 			howConsentId = "consentId")
-	public Log openAccount(User employee, String userId,@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
+	public Log openAccount(User employee, String userId, String whomId, @TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
 			Purpose purpose, String consentId)
 	{
 		var log = new Log();
@@ -27,10 +27,10 @@ public class AccountManager {
 		return log;
 	}
 	
-	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
 			howConsentId = "consentId", howDocumentId = "custodyDocumentId")
-	public Log openAccountChild(User employee, String userId,@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
+	public Log openAccountChild(User employee, String userId, String whomId, @TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
 			Purpose purpose, String consentId, String custodyDocumentId)
 	{
 		var log = new Log();
