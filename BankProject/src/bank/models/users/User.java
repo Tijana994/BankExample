@@ -2,7 +2,7 @@ package bank.models.users;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", childrens = "subUsers", inhabits = "location")
+@PrincipalAnnotation(id = "username")
 public class User {
 
 	private String username;
