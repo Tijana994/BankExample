@@ -18,13 +18,10 @@ import privacyModel.PrincipalType;
 
 public class UserManager {
 	
-	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON, shouldSetBirtday = true)
-	public Employee createEmployee(String username, LocalDate birthday)
+	@CreatePrincipalAnnotation(scope = PrincipalScope.IN, type = PrincipalType.NATURAL_PERSON, isLegalAge = true)
+	public Employee createEmployee(String username)
 	{
-		var date = java.util.Date.from(birthday.atStartOfDay()
-			      .atZone(ZoneId.systemDefault())
-			      .toInstant());
-		return new Employee(username, date);
+		return new Employee(username);
 	}
 	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, isLegalAge = true)

@@ -1,20 +1,11 @@
 package bank.models.users;
 
-import java.util.Date;
-
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "birthday")
+@PrincipalAnnotation(id = "username")
 public class Employee extends User{
-
-	private Date birthday;
 	
-	public Employee(String username, Date birthday) {
+	public Employee(String username) {
 		super(username);
-		this.birthday = birthday;
-	}
-
-	public Date getBirthday() {
-		return birthday;
 	}
 }

@@ -35,11 +35,11 @@ public class BankProject {
 		var hungary = locationHelper.createCountry("Hungary");
 		var city2 = locationHelper.createCity("Budapest", hungary);
 		var employees = new ArrayList<User>();
-		var ned = bankProject.bank.getUserManager().createEmployee("Ned - bank", LocalDate.of(1990, 4, 10));
-		employees.add(ned);
-		var patti = bankProject.bank.getUserManager().createEmployee("Patti - bank", LocalDate.of(1994, 4, 25));
-		employees.add(patti);
 		var bankUser = bankProject.bank.getUserManager().createLegalEntity("Green bank", employees, city2);
+		var ned = bankProject.bank.getUserManager().createEmployee("Ned - bank");
+		DataFactory.addSubPrincipal("Ned - bank", "Green bank");
+		var patti = bankProject.bank.getUserManager().createEmployee("Patti - bank");
+		DataFactory.addSubPrincipal("Patti - bank", "Green bank");
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 		
 		var defaultPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
