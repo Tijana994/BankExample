@@ -185,5 +185,8 @@ public class BankProject {
 		DataFactory.addPrivacyDataWithSharedPrivacyData("account number", DataType.GENERAL, true, null, null);
 		DataFactory.addPrivacyDataWithSharedPrivacyData("identity number", DataType.BIOMETRIC, true, "Identity document", encription);
 		DataFactory.addPrivacyDataWithSharedPrivacyData("email", DataType.GENERAL, true, null, null);
+		
+		DataFactory.addCountry("USA", false, 21);
+		DataFactory.addRegion("NYC", "USA");
 	}
 }
