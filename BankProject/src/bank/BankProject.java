@@ -149,7 +149,7 @@ public class BankProject {
 		var investigationPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),3,2);
 		
 		bankProject.bank.getAccountManager().policeInvestigation(bankUser, john.getUsername(), police.getUsername(), 
-				new ArrayList<String>(Arrays.asList(courtApproval.getDocumentId())),from1, to1, investigationPurpose);
+				new ArrayList<String>(Arrays.asList(courtApproval.getDocumentId())),from1, to1, investigationPurpose, "Police investigation for " + john.getUsername());
 		
 		System.out.println("End");
 	}
