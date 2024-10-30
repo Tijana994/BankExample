@@ -12,6 +12,8 @@ import bank.managers.LocationManager;
 import bank.models.*;
 import bank.models.users.User;
 import privacyModel.DataType;
+import privacyModel.ProcessingReason;
+import privacyModel.ProcessingReasonSubtype;
 import utility.PrivacyDataFactory.DataFactory;
 import utility.ProjectConfiguration.Configuration;
 
@@ -42,6 +44,7 @@ public class BankProject {
 		DataFactory.addSubPrincipal("Patti - bank", "Green bank");
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 		
+		//the other way for instantiating purpose
 		var defaultPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
 		
 		//use case 1
@@ -146,10 +149,10 @@ public class BankProject {
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
 		
-		var investigationPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),3,2);
+		var investigationPurpose = DataFactory.createPurpose(null, ProcessingReason.PUBLIC_INTEREST, ProcessingReasonSubtype.INVESTIGATION);
 		
-		bankProject.bank.getAccountManager().policeInvestigation(bankUser, john.getUsername(), police.getUsername(), 
-				new ArrayList<String>(Arrays.asList(courtApproval.getDocumentId())),from1, to1, investigationPurpose, "Police investigation for " + john.getUsername());
+		bankProject.bank.getAccountManager().policeInvestigation(bankUser, bob.getUsername(), police.getUsername(), 
+				new ArrayList<String>(Arrays.asList(courtApproval.getDocumentId())),from1, to1, investigationPurpose, "Police investigation for " + bob.getUsername());
 		
 		System.out.println("End");
 	}
