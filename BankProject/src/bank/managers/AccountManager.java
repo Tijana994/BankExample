@@ -28,6 +28,17 @@ public class AccountManager {
 	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
+			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
+			howConsentId = "consentId")
+	public Log openAccount(User employee, String userId, String whomId, @TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
+			privacyModel.Purpose purpose, String consentId)
+	{
+		var log = new Log();
+		log.setLogId("Open account for " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
 			why ="purpose", when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
 			howConsentId = "consentId", howDocumentId = "custodyDocumentId")
 	public Log openAccountChild(User employee, String userId, String whomId, @TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, 
@@ -73,9 +84,9 @@ public class AccountManager {
 	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
-			why ="purpose", when = "start", actions = {Action.ACCESS}, datas = {"email"})
+			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.ACCESS}, datas = {"email"})
 	public Log emailSendingForCard(User employee, String userId,
-			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose)
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, privacyModel.Purpose purpose)
 	{
 		var log = new Log();
 		log.setLogId("Email sending for new credit card to " + userId);

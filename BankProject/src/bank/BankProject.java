@@ -107,15 +107,16 @@ public class BankProject {
 		
 		//use case 3
 		//3.1
-		var subpurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),6,0);
-		var purpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(Arrays.asList(subpurpose)),2,7);
+		var marketingPurpose = DataFactory.createPurpose("test", ProcessingReason.MARKETING, ProcessingReasonSubtype.NONE);
+		var personalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
+		personalPurpose.getSubPurposes().add(marketingPurpose);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john, "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				purpose, consent2.getDocumentId());
+				personalPurpose, consent2.getDocumentId());
 		
 		//3.2
 		var emailSending = bankProject.bank.getAccountManager().emailSendingForCard(patti, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				subpurpose);
+				marketingPurpose);
 		
 		//3.3
 		var complaint3 = bankProject.bank.getComplaintManager().createComplaintOnAction("Stop sending emails in marketing purpose","-",
