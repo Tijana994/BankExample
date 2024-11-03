@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.security.model.validation.annotations.TimeStatementAnnotation;
 import com.security.model.validation.annotations.creators.CreatePolicyStatementAnnotation;
+import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
 
+import bank.models.Account;
 import bank.models.Location;
 import bank.models.Log;
 import bank.models.Purpose;
@@ -36,6 +38,15 @@ public class AccountManager {
 		var log = new Log();
 		log.setLogId("Open account for " + userId);
 		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
+			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name" , "email", "account number", "identity number"}, 
+			howConsentId = "consentId", systemActionId = "logId", 
+			parametersLocation =  ParametersObjectsLocation.PropertyInParameterObject, propertyObjectName = "account")
+	public void openAccount(Account account)
+	{
+		//TODO - method with properyty object, logid and purpose
 	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",

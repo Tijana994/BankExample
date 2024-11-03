@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <privacyModel:PrivacyPolicy xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:privacyModel="http://privacymodel" name="Bank example" owner="//@allPrincipals.0">
   <policyStatements name="Open account for Eve" who="//@allPrincipals.1" whose="//@allPrincipals.3" whom="//@allPrincipals.0">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:48.965+0100"/>
-    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:38.336+0100"/>
+    <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity"/>
     <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
       <actions>Collecting</actions>
@@ -10,7 +10,7 @@
     <how consent="//@allConsents.0"/>
   </policyStatements>
   <policyStatements name="Check account for Eve" who="//@allPrincipals.1" whose="//@allPrincipals.3">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:49.835+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:39.109+0100"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
     <what datas="//@allSharedPrivacyData.1">
       <actions>Access</actions>
@@ -18,7 +18,7 @@
   </policyStatements>
   <policyStatements name="Transfer account for Eve" who="//@allPrincipals.1" whose="//@allPrincipals.3" whom="//@allPrincipals.0">
     <when xsi:type="privacyModel:TimeInterval">
-      <start dateTime="2024-11-02T19:00:50.156+0100"/>
+      <start dateTime="2024-11-03T13:35:39.407+0100"/>
       <end preposition="to" dateTime="2034-04-25T00:00:00.000+0200"/>
     </when>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
@@ -29,7 +29,7 @@
     <where source="//@locations.5" destination="//@locations.3"/>
   </policyStatements>
   <policyStatements name="Open account for Alice" who="//@allPrincipals.1" whose="//@allPrincipals.5" whom="//@allPrincipals.0">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:51.071+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:40.233+0100"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
     <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
@@ -38,21 +38,21 @@
     <how documents="//@allDocuments.1" consent="//@allConsents.1"/>
   </policyStatements>
   <policyStatements name="Check account for Alice" who="//@allPrincipals.1" whose="//@allPrincipals.5">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:51.199+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:40.353+0100"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
     <what datas="//@allSharedPrivacyData.1">
       <actions>Access</actions>
     </what>
   </policyStatements>
   <policyStatements name="Data rectification for Alice" who="//@allPrincipals.1" whose="//@allPrincipals.5" causedBy="//@allComplaints.0">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:51.846+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:40.957+0100"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
     <what datas="//@allSharedPrivacyData.3">
       <actions>Rectification</actions>
     </what>
   </policyStatements>
   <policyStatements name="Open account for John" who="//@allPrincipals.1" whose="//@allPrincipals.4" whom="//@allPrincipals.0">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:53.067+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:42.048+0100"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity">
       <subPurposes processingReason="Marketing" details="test"/>
     </why>
@@ -63,21 +63,21 @@
     <how consent="//@allConsents.2"/>
   </policyStatements>
   <policyStatements name="Email sending for new credit card to John" who="//@allPrincipals.2" whose="//@allPrincipals.4">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:53.279+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:42.263+0100"/>
     <why processingReason="Marketing" details="test"/>
     <what datas="//@allSharedPrivacyData.3">
       <actions>Access</actions>
     </what>
   </policyStatements>
   <policyStatements name="Stop sending mails to John" who="//@allPrincipals.2" whose="//@allPrincipals.4" causedBy="//@allComplaints.2">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:53.750+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:42.743+0100"/>
     <why processingReason="StopProcessing" details=""/>
     <what datas="//@allSharedPrivacyData.3">
       <actions>StopProcessing</actions>
     </what>
   </policyStatements>
   <policyStatements name="Open account for Bob" who="//@allPrincipals.2" whose="//@allPrincipals.6" whom="//@allPrincipals.0">
-    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-02T19:00:55.431+0100"/>
+    <when xsi:type="privacyModel:TimeStatement" preposition="at" dateTime="2024-11-03T13:35:44.319+0100"/>
     <why processingReason="OutOfScope" processingReasonSubtype="PersonalActivity" details=""/>
     <what datas="//@allSharedPrivacyData.0 //@allSharedPrivacyData.3 //@allSharedPrivacyData.1 //@allSharedPrivacyData.2">
       <actions>Store</actions>
@@ -87,7 +87,7 @@
   </policyStatements>
   <policyStatements name="Police investigation for Bob" who="//@allPrincipals.0" whose="//@allPrincipals.6" whom="//@allPrincipals.7">
     <when xsi:type="privacyModel:TimeInterval">
-      <start dateTime="2024-11-02T19:00:56.576+0100"/>
+      <start dateTime="2024-11-03T13:35:45.397+0100"/>
       <end preposition="to" dateTime="2025-04-25T00:00:00.000+0200"/>
     </when>
     <why processingReason="PublicInterest" processingReasonSubtype="Investigation"/>
@@ -124,33 +124,33 @@
   <allDatas name="account number" type="General"/>
   <allDatas name="identity number"/>
   <allDatas name="email" type="General"/>
-  <allComplaints name="Rectification of email" who="//@allPrincipals.5" when="2024-11-02T19:00:51.345+0100" reason="Change email">
+  <allComplaints name="Rectification of email" who="//@allPrincipals.5" when="2024-11-03T13:35:40.493+0100" reason="Change email">
     <action xsi:type="privacyModel:ComplaintBasedOnData" subject="//@allDatas.3" type="Rectification"/>
   </allComplaints>
-  <allComplaints name="Erasure of email - Alice" who="//@allPrincipals.5" when="2024-11-02T19:00:52.222+0100" reason="-">
+  <allComplaints name="Erasure of email - Alice" who="//@allPrincipals.5" when="2024-11-03T13:35:41.296+0100" reason="-">
     <action xsi:type="privacyModel:ComplaintBasedOnData" denialReason="//@allDenials.0" subject="//@allDatas.3"/>
   </allComplaints>
-  <allComplaints name="Stop sending emails in marketing purpose" who="//@allPrincipals.4" when="2024-11-02T19:00:53.509+0100" reason="-">
+  <allComplaints name="Stop sending emails in marketing purpose" who="//@allPrincipals.4" when="2024-11-03T13:35:42.483+0100" reason="-">
     <action xsi:type="privacyModel:ComplaintBasedOnAction" statement="//@policyStatements.7"/>
   </allComplaints>
-  <allComplaints name="John consent withdrawal" who="//@allPrincipals.4" when="2024-11-02T19:00:54.298+0100" reason="Changing bank">
+  <allComplaints name="John consent withdrawal" who="//@allPrincipals.4" when="2024-11-03T13:35:43.286+0100" reason="Changing bank">
     <action xsi:type="privacyModel:Withdraw" subject="//@allConsents.2"/>
   </allComplaints>
   <privacyPolicyHelper/>
-  <allDenials name="Erasure cannot be done - need parent persmission" when="2024-11-02T19:00:52.658+0100" approvedBy="//@allPrincipals.0" reason="Still processing" basedOnStatements="//@policyStatements.4"/>
-  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-11-02T19:00:48.911+0100" location="Novi Sad 1"/>
-  <allConsents name="Alice consent" providedBy="//@allPrincipals.4" startDate="2024-11-02T19:00:50.863+0100" location="Novi Sad 1"/>
-  <allConsents name="John consent" providedBy="//@allPrincipals.4" startDate="2024-11-02T19:00:52.869+0100" location="Novi Sad 1"/>
-  <allConsents name="Bob consent" providedBy="//@allPrincipals.6" startDate="2024-11-02T19:00:55.161+0100" location="Novi Sad 1"/>
-  <allDocuments name="Transfer consent Eve" providedBy="//@allPrincipals.3" startDate="2024-11-02T19:00:50.051+0100" location="system" documentType="TransferCertificate"/>
-  <allDocuments name="John-Alice child custody" providedBy="//@allPrincipals.4" startDate="2024-11-02T19:00:50.971+0100" location="System"/>
-  <allDocuments name="Police investigation approval - Bob" providedBy="//@allPrincipals.8" startDate="2024-11-02T19:00:56.296+0100" location="-" documentType="CourtApproval"/>
-  <notifications name="Notify Eve about transfer" type="ThirdPartyTransfer" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.3" causedBy="//@policyStatements.2" when="2024-11-02T19:00:50.401+0100"/>
-  <notifications name="Notify Alice and Green bank about rectification" type="Rectification" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.5 //@allPrincipals.0" causedBy="//@allComplaints.0" when="2024-11-02T19:00:51.684+0100"/>
-  <notifications name="Notify Alice about rectified email" type="ExecutedRectification" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.5" causedBy="//@policyStatements.5" when="2024-11-02T19:00:52.023+0100"/>
-  <notifications name="Notify Alice and Green bank about erasure" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.5 //@allPrincipals.0" causedBy="//@allComplaints.1" when="2024-11-02T19:00:52.446+0100"/>
-  <notifications name="Notify John about stop sending mails" type="StopProcessing" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.4" causedBy="//@policyStatements.8" when="2024-11-02T19:00:54.021+0100"/>
-  <notifications name="Notify John and Ned about withdrawal" type="Withdraw" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.4 //@allPrincipals.1" causedBy="//@allComplaints.3" when="2024-11-02T19:00:54.603+0100"/>
+  <allDenials name="Erasure cannot be done - need parent persmission" when="2024-11-03T13:35:41.662+0100" approvedBy="//@allPrincipals.0" reason="Still processing" basedOnStatements="//@policyStatements.4"/>
+  <allConsents name="Eve consent" providedBy="//@allPrincipals.3" startDate="2024-11-03T13:35:38.288+0100" location="Novi Sad 1"/>
+  <allConsents name="Alice consent" providedBy="//@allPrincipals.4" startDate="2024-11-03T13:35:40.041+0100" location="Novi Sad 1"/>
+  <allConsents name="John consent" providedBy="//@allPrincipals.4" startDate="2024-11-03T13:35:41.867+0100" location="Novi Sad 1"/>
+  <allConsents name="Bob consent" providedBy="//@allPrincipals.6" startDate="2024-11-03T13:35:44.049+0100" location="Novi Sad 1"/>
+  <allDocuments name="Transfer consent Eve" providedBy="//@allPrincipals.3" startDate="2024-11-03T13:35:39.316+0100" location="system" documentType="TransferCertificate"/>
+  <allDocuments name="John-Alice child custody" providedBy="//@allPrincipals.4" startDate="2024-11-03T13:35:40.139+0100" location="System"/>
+  <allDocuments name="Police investigation approval - Bob" providedBy="//@allPrincipals.8" startDate="2024-11-03T13:35:45.127+0100" location="-" documentType="CourtApproval"/>
+  <notifications name="Notify Eve about transfer" type="ThirdPartyTransfer" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.3" causedBy="//@policyStatements.2" when="2024-11-03T13:35:39.662+0100"/>
+  <notifications name="Notify Alice and Green bank about rectification" type="Rectification" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.5 //@allPrincipals.0" causedBy="//@allComplaints.0" when="2024-11-03T13:35:40.815+0100"/>
+  <notifications name="Notify Alice about rectified email" type="ExecutedRectification" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.5" causedBy="//@policyStatements.5" when="2024-11-03T13:35:41.123+0100"/>
+  <notifications name="Notify Alice and Green bank about erasure" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.5 //@allPrincipals.0" causedBy="//@allComplaints.1" when="2024-11-03T13:35:41.477+0100"/>
+  <notifications name="Notify John about stop sending mails" type="StopProcessing" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.4" causedBy="//@policyStatements.8" when="2024-11-03T13:35:43.025+0100"/>
+  <notifications name="Notify John and Ned about withdrawal" type="Withdraw" notifiers="//@allPrincipals.0" receivers="//@allPrincipals.4 //@allPrincipals.1" causedBy="//@allComplaints.3" when="2024-11-03T13:35:43.543+0100"/>
   <allSharedPrivacyData name="name" privacydata="//@allDatas.0" dataSource="Identity document">
     <additionalProtectionControls>Encryption</additionalProtectionControls>
   </allSharedPrivacyData>

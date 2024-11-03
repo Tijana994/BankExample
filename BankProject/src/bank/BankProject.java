@@ -46,14 +46,17 @@ public class BankProject {
 		
 		//the other way for instantiating purpose
 		var defaultPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
+		//easier way for instantiating purpose
+		var defaultPersonalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
 		
 		//use case 1
 		//1.1
 		var eve = bankProject.bank.getUserManager().createClient("Eve");
 		
 		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve, "Novi Sad 1");
-		bankProject.bank.getAccountManager().openAccount(ned, eve.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
-				defaultPurpose, consent.getDocumentId());
+		var account = new Account(ned, eve.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				defaultPersonalPurpose, consent.getDocumentId(), "Open account for " + eve.getUsername());
+		bankProject.bank.getAccountManager().openAccount(account);
 		
 		//1.2
 		bankProject.bank.getAccountManager().checkAccount(ned, eve.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
