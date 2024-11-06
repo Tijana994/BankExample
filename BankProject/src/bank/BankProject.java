@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
+import com.security.model.validation.annotations.updaters.UpdateConsentAnnotation;
+
 import bank.managers.LocationManager;
 import bank.models.*;
 import bank.models.users.User;
@@ -81,6 +84,8 @@ public class BankProject {
 		var alice = bankProject.bank.getUserManager().createMinorClient("Alice", LocalDate.of(2010, 4, 10), 
 				new ArrayList<User>(Arrays.asList(john)));
 		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john, "Novi Sad 1");
+		consent1.setEndDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
+		bankProject.bank.getDocumentManager().updateConsent(consent1);
 		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john, "System");
 		bankProject.bank.getAccountManager().openAccountChild(ned, alice.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent1.getDocumentId(), childCustody.getDocumentId());
@@ -160,6 +165,7 @@ public class BankProject {
 		
 		System.out.println("End");
 	}
+	
 
 	@SuppressWarnings("serial")
 	private static void setUpConfiguration() {

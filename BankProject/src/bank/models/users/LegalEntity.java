@@ -7,7 +7,7 @@ import com.security.model.validation.annotations.PrincipalAnnotation;
 
 import bank.models.Location;
 
-@PrincipalAnnotation(id = "username", childrens = "subUsers", inhabits = "location")
+@PrincipalAnnotation(id = "username", children = "subUsers", inhabits = "location")
 public class LegalEntity extends User{
 	
 	private List<User> subUsers = new ArrayList<User>();

@@ -19,6 +19,7 @@ public class Document {
 	private String documentId;
 	private String physicalLocation;
 	private Date startDate;
+	private Date endDate;
 	private User createdBy;
 	public String getDocumentId() {
 		return documentId;
@@ -43,5 +44,11 @@ public class Document {
 	}
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

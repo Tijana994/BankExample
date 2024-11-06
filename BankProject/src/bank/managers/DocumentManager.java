@@ -6,6 +6,8 @@ import java.util.Date;
 
 import com.security.model.validation.annotations.creators.CreateConsentAnnotation;
 import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
+import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
+import com.security.model.validation.annotations.updaters.UpdateConsentAnnotation;
 
 import bank.models.Document;
 import bank.models.users.User;
@@ -37,5 +39,13 @@ public class DocumentManager {
 	public Document createCourtApproval(String documentId, User createdBy, String physicalLocation)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
+	}
+	
+	@UpdateConsentAnnotation(terminationDate = "endDate", consentId ="documentId",
+			parametersLocation = ParametersObjectsLocation.PropertyInParameterObject, propertyObjectName = "consent")
+	public void updateConsent(Document consent) {
+		// TODO Auto-generated method stub
+		System.out.println("updateConsent");
+		
 	}
 }
