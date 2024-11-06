@@ -29,6 +29,12 @@ public class DocumentManager {
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
+	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT, providedById = "providedBy")
+	public Document createConsentDocument(String documentId, User createdBy, String physicalLocation, String providedBy)
+	{
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
+	}
+	
 	@CreateDocumentAnnotation(documentType = DocumentType.TRANSFER_CERTIFICATE)
 	public Document createTransferDocument(String documentId, User createdBy, String physicalLocation)
 	{
