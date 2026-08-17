@@ -11,7 +11,6 @@ import java.util.Date;
 import bank.managers.LocationManager;
 import bank.models.*;
 import bank.models.users.User;
-import privacyModel.DataType;
 import privacyModel.ProcessingReason;
 import privacyModel.ProcessingReasonSubtype;
 import utility.PrivacyDataFactory.DataFactory;
@@ -20,15 +19,17 @@ import utility.ProjectConfiguration.Configuration;
 public class BankProject {
 
 	private BankUtility bank;
+	private static TemdaConfiguration config;
 	
 	public BankProject()
 	{
 		bank = new BankUtility();
+		config = new TemdaConfiguration();
 	}
 	
 	public static void main(String[] args) {
 		//configuration and set up
-		setUpConfiguration();
+		config.setUpConfiguration();
 		
 		BankProject bankProject = new BankProject();
 		var locationHelper = new LocationManager();
@@ -151,7 +152,7 @@ public class BankProject {
 		var court = bankProject.bank.getUserManager().createLegalEntityOut("Budapest court");
 		var courtApproval = bankProject.bank.getDocumentManager().createCourtApproval("Police investigation approval - Bob", court, "-");
 		var from1 = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
-		var to1 = java.util.Date.from(LocalDate.of(2025, 4, 25).atStartOfDay()
+		var to1 = java.util.Date.from(LocalDate.of(2030, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
 		
@@ -161,42 +162,5 @@ public class BankProject {
 				new ArrayList<String>(Arrays.asList(courtApproval.getDocumentId())),from1, to1, investigationPurpose, "Police investigation for " + bob.getUsername());
 		
 		System.out.println("End");
-	}
-	
-
-	@SuppressWarnings("serial")
-	private static void setUpConfiguration() {
-		Configuration.setXmlPath("model/bankTest.xmi");
-		Configuration.createDefaultConfiguration();
-		Configuration.setPrivacyPolicyName("Bank example");
-		Configuration.setDataSources(new ArrayList<String>()
-		{{
-			add("PubliclyAccessibleSources"); 
-			add("Identity document");
-			add("Internal");
-		}});
-		Configuration.setProtectionControlMethods(new ArrayList<String>()
-		{{
-			add("OriginalData"); 
-			add("Pseudonymisation");
-			add("Encryption");
-		}});
-		Configuration.setDefaultProtectionControls(new ArrayList<String>()
-		{{
-			add("OriginalData");
-		}});
-		
-		var encription = new ArrayList<String>()
-		{{
-			add("Encryption");
-		}};
-		
-		DataFactory.addPrivacyDataWithSharedPrivacyData("name", DataType.GENERAL, true, "Identity document", encription);
-		DataFactory.addPrivacyDataWithSharedPrivacyData("account number", DataType.GENERAL, true, null, null);
-		DataFactory.addPrivacyDataWithSharedPrivacyData("identity number", DataType.BIOMETRIC, true, "Identity document", encription);
-		DataFactory.addPrivacyDataWithSharedPrivacyData("email", DataType.GENERAL, true, null, null);
-		
-		DataFactory.addCountry("USA", false, 21);
-		DataFactory.addRegion("NYC", "USA");
 	}
 }
