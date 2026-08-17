@@ -46,7 +46,7 @@ public class AccountManager {
 			parametersLocation =  ParametersObjectsLocation.PropertyInParameterObject, propertyObjectName = "account")
 	public void openAccount(Account account)
 	{
-		//TODO - method with properyty object, logid and purpose
+		
 	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
