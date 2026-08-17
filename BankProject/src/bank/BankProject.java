@@ -19,17 +19,15 @@ import utility.ProjectConfiguration.Configuration;
 public class BankProject {
 
 	private BankUtility bank;
-	private static TemdaConfiguration config;
 	
 	public BankProject()
 	{
 		bank = new BankUtility();
-		config = new TemdaConfiguration();
 	}
 	
 	public static void main(String[] args) {
 		//configuration and set up
-		config.setUpConfiguration();
+		TemdaConfiguration.setUpConfiguration();
 		
 		BankProject bankProject = new BankProject();
 		var locationHelper = new LocationManager();

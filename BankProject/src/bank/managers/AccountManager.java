@@ -109,7 +109,7 @@ public class AccountManager {
 	public void policeInvestigation(User employee, String userId, String policeStationId, ArrayList<String> documentId,
 			@TimeStatementAnnotation(preposition = TimePreposition.FROM) Date start, @TimeStatementAnnotation(preposition = TimePreposition.TO) Date to, privacyModel.Purpose purpose, String logId)
 	{
-		//TODO
+		
 	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
