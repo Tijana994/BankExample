@@ -81,7 +81,7 @@ public class AccountManager {
 	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whom = "bank",
-			why ="purpose", when = "start,end", actions = {Action.TRANSFER}, 
+			why ="purpose", when = "start,end", actions = {Action.TRANSFER, Action.DATA_PORTABILITY}, 
 			howConsentId = "consentId", howDocumentsIds = "transferDocumentId", whereSource = "locationSource", 
 			whereDestination = "locationDestination", datas = {"name" , "email", "account number", "identity number"})
 	public Log transferAccount(User employee, String userId, User bank,
