@@ -5,6 +5,7 @@ import java.time.ZoneOffset;
 import java.util.Date;
 
 import com.security.model.validation.annotations.creators.CreateConsentAnnotation;
+import com.security.model.validation.annotations.creators.CreateContractAnnotation;
 import com.security.model.validation.annotations.creators.CreateDocumentAnnotation;
 import com.security.model.validation.annotations.enums.ParametersObjectsLocation;
 import com.security.model.validation.annotations.updaters.UpdateConsentAnnotation;
@@ -43,6 +44,12 @@ public class DocumentManager {
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.COURT_APPROVAL)
 	public Document createCourtApproval(String documentId, User createdBy, String physicalLocation)
+	{
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
+	}
+	
+	@CreateContractAnnotation(providedById = "providedBy")
+	public Document createContractDocument(String documentId, User createdBy, String physicalLocation, String providedBy)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
