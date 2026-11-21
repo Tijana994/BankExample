@@ -42,6 +42,18 @@ public class NotificationManager {
 		return new UserNotification(name,timestamp, causedById, receiver, notifier);
 	}
 	
+	@CreateNotificationAnnotation(causedByType = TargetType.ComplaintBasedOnAction, type = NotificationType.RESTRICTION)
+	public UserNotification notifyUsersAboutRestriction(String name, Date timestamp, String causedById, List<User> receivers, User notifier)
+	{
+		return new UserNotification(name,timestamp, causedById, receivers, notifier);
+	}
+	
+	@CreateNotificationAnnotation(causedByType = TargetType.PolicyStatement, type = NotificationType.RESTRICTION_LIFTED)
+	public UserNotification notifyUserAboutLiftingRestriction(String name, Date timestamp, String causedById, User receiver, User notifier)
+	{
+		return new UserNotification(name,timestamp, causedById, receiver, notifier);
+	}
+	
 	@CreateNotificationAnnotation(causedByType = TargetType.Withdraw, type = NotificationType.WITHDRAW)
 	public UserNotification notifyUserAboutWithdrawal(String name, Date timestamp, String causedById, List<User> receivers, User notifier)
 	{

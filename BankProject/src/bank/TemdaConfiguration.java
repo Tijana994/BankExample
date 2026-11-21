@@ -2,6 +2,7 @@ package bank;
 
 import java.util.ArrayList;
 
+import privacyModel.DataOrigin;
 import privacyModel.DataType;
 import utility.PrivacyDataFactory.DataFactory;
 import utility.ProjectConfiguration.Configuration;
@@ -35,10 +36,10 @@ public class TemdaConfiguration {
 			add("Encryption");
 		}};
 		
-		DataFactory.addPrivacyDataWithSharedPrivacyData("name", DataType.GENERAL, true, "Identity document", encription);
-		DataFactory.addPrivacyDataWithSharedPrivacyData("account number", DataType.GENERAL, true, null, null);
-		DataFactory.addPrivacyDataWithSharedPrivacyData("identity number", DataType.BIOMETRIC, true, "Identity document", encription);
-		DataFactory.addPrivacyDataWithSharedPrivacyData("email", DataType.GENERAL, true, null, null);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("name", DataType.GENERAL, DataOrigin.DATA_SUBJECT, "Identity document", encription);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("account number", DataType.GENERAL, DataOrigin.DATA_SUBJECT, null, null);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("identity number", DataType.BIOMETRIC, DataOrigin.DATA_SUBJECT, "Identity document", encription);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("email", DataType.GENERAL, DataOrigin.DATA_SUBJECT, null, null);
 		
 		DataFactory.addCountry("USA", false, 21);
 		DataFactory.addRegion("NYC", "USA");

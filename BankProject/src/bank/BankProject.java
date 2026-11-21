@@ -115,7 +115,7 @@ public class BankProject {
 		var personalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
 		personalPurpose.getSubPurposes().add(marketingPurpose);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john, "Novi Sad 1");
-		bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+		var johnAccount = bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				personalPurpose, consent2.getDocumentId());
 		
 		//3.2
@@ -132,6 +132,26 @@ public class BankProject {
 				stopSending.getLogId(), john, bankUser);
 		
 		//3.4
+		var complaint5 = bankProject.bank.getComplaintManager().createComplaintOnActionForRestriction("Restriction of email - John",
+				"John contests the accuracy of his email", johnAccount.getLogId(), john);
+		var restrictionPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
+		bankProject.bank.getAccountManager().restrictProcessing(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				restrictionPurpose, complaint5.getComplaintId());
+		bankProject.bank.getNotificationManager().notifyUsersAboutRestriction("Notify John and Patti about restriction", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				complaint5.getComplaintId(), new ArrayList<User>(Arrays.asList(john, patti)), bankUser);
+		var rectificationPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
+		var johnRectification = bankProject.bank.getAccountManager().rectificationOfData(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				rectificationPurpose, complaint5.getComplaintId());
+		bankProject.bank.getNotificationManager().notifyUserAboutExecutedRectification("Notify John about rectified email", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				johnRectification.getLogId(), john, bankUser);
+		var liftDate = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
+		var liftPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
+		var lift = bankProject.bank.getAccountManager().liftRestriction(ned, john.getUsername(), liftDate, 
+				liftPurpose, complaint5.getComplaintId());
+		bankProject.bank.getNotificationManager().notifyUserAboutLiftingRestriction("Notify John about lifting restriction", liftDate, 
+				lift.getLogId(), john, bankUser);
+		
+		//3.5
 		var complaint4 = bankProject.bank.getComplaintManager().createComplaintWithWithdraw("John consent withdrawal", "Changing bank", 
 				consent2.getDocumentId(), john);
 		bankProject.bank.getNotificationManager().notifyUserAboutWithdrawal("Notify John and Ned about withdrawal", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 

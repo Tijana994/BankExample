@@ -122,6 +122,26 @@ public class AccountManager {
 		return log;
 	}
 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+			why ="purpose", when = "start", actions = {Action.RESTRICT_PROCESSING}, datas = {"email"}, causedById = "complaintId")
+	public Log restrictProcessing(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
+	{
+		var log = new Log();
+		log.setLogId("Restrict processing of email for " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+			why ="purpose", when = "start", actions = {Action.LIFT_RESTRICTION}, datas = {"email"}, causedById = "complaintId")
+	public Log liftRestriction(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
+	{
+		var log = new Log();
+		log.setLogId("Lift restriction of email for " + userId);
+		return log;
+	}
+
 	public Purpose createPurpose(String text, List<Purpose> subpurposes, int reason, int subtype) {
 		var purpose = new Purpose(text, subpurposes,reason,subtype);
 		return purpose;

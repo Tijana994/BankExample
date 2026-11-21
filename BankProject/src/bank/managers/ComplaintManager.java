@@ -11,6 +11,7 @@ import com.security.model.validation.annotations.creators.CreateWithdrawAnnotati
 import bank.models.Complaint;
 import bank.models.Withdraw;
 import bank.models.users.User;
+import privacyModel.ComplaintBasedOnActionType;
 import privacyModel.ComplaintBasedOnDataType;
 
 public class ComplaintManager {
@@ -29,6 +30,12 @@ public class ComplaintManager {
 	
 	@CreateComplaintBasedOnActionAnnotation(policyStatementId = "actionId")
 	public Complaint createComplaintOnAction(String complaintId, String explanation, String actionId, User client)
+	{
+		return new Complaint(complaintId, explanation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), client);
+	}
+	
+	@CreateComplaintBasedOnActionAnnotation(policyStatementId = "actionId", type = ComplaintBasedOnActionType.RESTRICTION)
+	public Complaint createComplaintOnActionForRestriction(String complaintId, String explanation, String actionId, User client)
 	{
 		return new Complaint(complaintId, explanation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), client);
 	}
