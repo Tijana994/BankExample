@@ -142,6 +142,38 @@ public class AccountManager {
 		return log;
 	}
 
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+			why ="purpose", when = "start", actions = {Action.STOP_PROCESSING}, datas = {"name" , "email", "account number", "identity number"}, causedById = "complaintId")
+	public Log stopProcessing(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, Purpose purpose, String complaintId)
+	{
+		var log = new Log();
+		log.setLogId("Stop processing for " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"credit history"}, 
+			howDocumentsIds = "documentIds")
+	public Log creditCheck(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, privacyModel.Purpose purpose, ArrayList<String> documentIds)
+	{
+		var log = new Log();
+		log.setLogId("Credit check for " + userId);
+		return log;
+	}
+	
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", whomId = "whomId",
+			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"name", "account number"}, 
+			howContractId = "contractId")
+	public Log grantLoan(User employee, String userId, String whomId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, privacyModel.Purpose purpose, String contractId)
+	{
+		var log = new Log();
+		log.setLogId("Grant loan for " + userId);
+		return log;
+	}
+
 	public Purpose createPurpose(String text, List<Purpose> subpurposes, int reason, int subtype) {
 		var purpose = new Purpose(text, subpurposes,reason,subtype);
 		return purpose;

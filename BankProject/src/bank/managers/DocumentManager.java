@@ -48,6 +48,12 @@ public class DocumentManager {
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
+	@CreateDocumentAnnotation(documentType = DocumentType.LEGAL_PROVISION)
+	public Document createLegalProvision(String documentId, User createdBy, String physicalLocation)
+	{
+		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
+	}
+	
 	@CreateContractAnnotation(providedById = "providedBy")
 	public Document createContractDocument(String documentId, User createdBy, String physicalLocation, String providedBy)
 	{

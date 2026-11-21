@@ -54,6 +54,12 @@ public class NotificationManager {
 		return new UserNotification(name,timestamp, causedById, receiver, notifier);
 	}
 	
+	@CreateNotificationAnnotation(causedByType = TargetType.PolicyStatement, type = NotificationType.DATA_COLLECTING)
+	public UserNotification notifyUserAboutCollecting(String name, Date timestamp, String causedById, User receiver, User notifier)
+	{
+		return new UserNotification(name,timestamp, causedById, receiver, notifier);
+	}
+	
 	@CreateNotificationAnnotation(causedByType = TargetType.Withdraw, type = NotificationType.WITHDRAW)
 	public UserNotification notifyUserAboutWithdrawal(String name, Date timestamp, String causedById, List<User> receivers, User notifier)
 	{

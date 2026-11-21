@@ -19,6 +19,7 @@ public class TemdaConfiguration {
 			add("PubliclyAccessibleSources"); 
 			add("Identity document");
 			add("Internal");
+			add("Credit bureau");
 		}});
 		Configuration.setProtectionControlMethods(new ArrayList<String>()
 		{{
@@ -40,6 +41,7 @@ public class TemdaConfiguration {
 		DataFactory.addPrivacyDataWithSharedPrivacyData("account number", DataType.GENERAL, DataOrigin.DATA_SUBJECT, null, null);
 		DataFactory.addPrivacyDataWithSharedPrivacyData("identity number", DataType.BIOMETRIC, DataOrigin.DATA_SUBJECT, "Identity document", encription);
 		DataFactory.addPrivacyDataWithSharedPrivacyData("email", DataType.GENERAL, DataOrigin.DATA_SUBJECT, null, null);
+		DataFactory.addPrivacyDataWithSharedPrivacyData("credit history", DataType.GENERAL, DataOrigin.THIRD_PARTY, "Credit bureau", null);
 		
 		DataFactory.addCountry("USA", false, 21);
 		DataFactory.addRegion("NYC", "USA");

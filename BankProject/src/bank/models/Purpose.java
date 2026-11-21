@@ -1,10 +1,11 @@
 package bank.models;
 
+import java.util.Date;
 import java.util.List;
 
 import com.security.model.validation.annotations.PurposeAnnotation;
 
-@PurposeAnnotation(details = "text", subPurposes = "purposes", reason = "reasonId", reasonSubtype = "subTypeId")
+@PurposeAnnotation(details = "text", subPurposes = "purposes", reason = "reasonId", reasonSubtype = "subTypeId", erasureDate = "erasureDate")
 public class Purpose {
 
 	public Purpose(String text, List<Purpose> purposes, int reasonId, int subTypeId) {
@@ -19,6 +20,7 @@ public class Purpose {
 	public List<Purpose> purposes;
 	public int reasonId;
 	public int subTypeId;
+	private Date erasureDate;
 	
 	public String getText() {
 		return text;
@@ -43,5 +45,11 @@ public class Purpose {
 	}
 	public void setSubTypeId(int subTypeId) {
 		this.subTypeId = subTypeId;
+	}
+	public Date getErasureDate() {
+		return erasureDate;
+	}
+	public void setErasureDate(Date erasureDate) {
+		this.erasureDate = erasureDate;
 	}
 }
