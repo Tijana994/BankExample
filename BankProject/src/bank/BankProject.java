@@ -43,15 +43,10 @@ public class BankProject {
 		DataFactory.addSubPrincipal("Patti - bank", "Green bank");
 		Configuration.setPrivacyPolicyOwner(bankUser.getUsername());
 		
-		//date by which the data collected when opening an account must be erased
-		var accountErasureDate = java.util.Date.from(LocalDate.of(2040, 1, 1).atStartOfDay()
-			      .atZone(ZoneId.systemDefault())
-			      .toInstant());
 		//the other way for instantiating purpose
 		var defaultPurpose = bankProject.bank.getAccountManager().createPurpose("", new ArrayList<Purpose>(),2,7);
-		defaultPurpose.setErasureDate(accountErasureDate);
 		//easier way for instantiating purpose
-		var defaultPersonalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY, accountErasureDate);
+		var defaultPersonalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
 		
 		//use case 1
 		//1.1
@@ -117,7 +112,7 @@ public class BankProject {
 		//use case 3
 		//3.1
 		var marketingPurpose = DataFactory.createPurpose("test", ProcessingReason.MARKETING, ProcessingReasonSubtype.NONE);
-		var personalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY, accountErasureDate);
+		var personalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
 		personalPurpose.getSubPurposes().add(marketingPurpose);
 		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john, "Novi Sad 1");
 		var johnAccount = bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -192,12 +187,9 @@ public class BankProject {
 		//use case 5 - lawful bases other than consent
 		//5.1 creditworthiness assessment based on a legal obligation, with data obtained from a credit bureau
 		var carol = bankProject.bank.getUserManager().createClient("Carol");
-		var loanErasureDate = java.util.Date.from(LocalDate.of(2040, 1, 1).atStartOfDay()
-			      .atZone(ZoneId.systemDefault())
-			      .toInstant());
 		var parliament = bankProject.bank.getUserManager().createLegalEntityOut("Hungarian Parliament");
 		var creditLaw = bankProject.bank.getDocumentManager().createLegalProvision("Consumer credit act - creditworthiness assessment", parliament, "Hungary");
-		var creditCheckPurpose = DataFactory.createPurpose("Creditworthiness assessment", ProcessingReason.LEGAL_OBLIGATION, ProcessingReasonSubtype.NONE, loanErasureDate);
+		var creditCheckPurpose = DataFactory.createPurpose("Creditworthiness assessment", ProcessingReason.LEGAL_OBLIGATION, ProcessingReasonSubtype.NONE);
 		var creditCheck = bankProject.bank.getAccountManager().creditCheck(ned, carol.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				creditCheckPurpose, new ArrayList<String>(Arrays.asList(creditLaw.getDocumentId())));
 		bankProject.bank.getNotificationManager().notifyUserAboutCollecting("Notify Carol about collecting credit history", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
@@ -205,7 +197,7 @@ public class BankProject {
 		
 		//5.2 loan granted on the basis of a contract with the data subject
 		var loanContract = bankProject.bank.getDocumentManager().createContractDocument("Loan contract - Carol", carol, "Budapest", carol.getUsername());
-		var loanPurpose = DataFactory.createPurpose("Loan agreement", ProcessingReason.CONTRACT_PERFORMANCE, ProcessingReasonSubtype.NONE, loanErasureDate);
+		var loanPurpose = DataFactory.createPurpose("Loan agreement", ProcessingReason.CONTRACT_PERFORMANCE, ProcessingReasonSubtype.NONE);
 		bankProject.bank.getAccountManager().grantLoan(ned, carol.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				loanPurpose, loanContract.getDocumentId());
 		
