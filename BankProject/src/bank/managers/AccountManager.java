@@ -151,6 +151,16 @@ public class AccountManager {
 		log.setLogId("Stop processing for " + userId);
 		return log;
 	}
+
+	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
+			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.ERASURE}, datas = {"name" , "email", "account number", "identity number"})
+	public Log eraseAccountData(User employee, String userId,
+			@TimeStatementAnnotation(preposition = TimePreposition.AT) Date start, privacyModel.Purpose purpose)
+	{
+		var log = new Log();
+		log.setLogId("Erasure of account data for " + userId);
+		return log;
+	}
 	
 	@CreatePolicyStatementAnnotation(who = "employee", whoseId ="userId", 
 			why ="purpose", isPurposeObject = true, when = "start", actions = {Action.STORE, Action.COLLECTING}, datas = {"credit history"}, 

@@ -161,6 +161,10 @@ public class BankProject {
 				stopProcessingPurpose, complaint4.getWithdrawId());
 		bankProject.bank.getNotificationManager().notifyUserAboutStopSendingMails("Notify John about stop processing", Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				stopProcessingJohn.getLogId(), john, bankUser);
+		//3.6 no other lawful basis remains for John's data after the withdrawal, so they are erased (Article 17(1)(b))
+		var erasurePurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
+		bankProject.bank.getAccountManager().eraseAccountData(ned, john.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
+				erasurePurpose);
 		
 		//use case 4
 		//4.1
