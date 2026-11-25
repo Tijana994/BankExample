@@ -67,7 +67,9 @@ public class BankProject {
 		var to = java.util.Date.from(LocalDate.of(2034, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
 			      .toInstant());
-		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), bankUser, from, to,
+		//the receiving bank in Serbia is another controller, to which Eve's data are transmitted
+		var serbianBank = bankProject.bank.getUserManager().createLegalEntityOut("Novi Sad bank");
+		var transferLog = bankProject.bank.getAccountManager().transferAccount(ned, eve.getUsername(), serbianBank, from, to,
 				defaultPurpose, city2, city1, consent.getDocumentId(), new ArrayList<String>(Arrays.asList(transferDocument.getDocumentId())));
 		
 		
