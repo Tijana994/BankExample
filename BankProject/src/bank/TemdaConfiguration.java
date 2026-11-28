@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import privacyModel.DataOrigin;
 import privacyModel.DataType;
+import utility.LogOutput;
 import utility.PrivacyDataFactory.DataFactory;
 import utility.ProjectConfiguration.Configuration;
 
@@ -11,6 +12,9 @@ public class TemdaConfiguration {
 	
 	@SuppressWarnings("serial")
 	public static void setUpConfiguration() {
+		//TeMDA messages, such as validation results, are written to the console
+		//(LogOutput.FILE together with Configuration.setLogFilePath appends them to a log file instead)
+		Configuration.setLogOutput(LogOutput.CONSOLE);
 		Configuration.setXmlPath("model/bankTest.xmi");
 		Configuration.createDefaultConfiguration();
 		Configuration.setPrivacyPolicyName("Bank example");
