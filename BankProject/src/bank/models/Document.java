@@ -4,12 +4,10 @@ import java.util.Date;
 
 import com.security.model.validation.annotations.PaperAnnotation;
 
-import bank.models.users.User;
-
-@PaperAnnotation(id="documentId", startDate="startDate",location="physicalLocation", providedBy ="createdBy")
+@PaperAnnotation(id="documentId", startDate="startDate", location="physicalLocation", description="description", providedById="createdBy")
 public class Document {
 
-	public Document(String documentId, String physicalLocation, Date startDate, User createdBy) {
+	public Document(String documentId, String physicalLocation, Date startDate, String createdBy) {
 		this.documentId = documentId;
 		this.physicalLocation = physicalLocation;
 		this.startDate = startDate;
@@ -17,15 +15,22 @@ public class Document {
 	}
 	
 	private String documentId;
+	private String description;
 	private String physicalLocation;
 	private Date startDate;
-	private Date endDate;
-	private User createdBy;
+
+	private String createdBy;
 	public String getDocumentId() {
 		return documentId;
 	}
 	public void setDocumentId(String documentId) {
 		this.documentId = documentId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getPhysicalLocation() {
 		return physicalLocation;
@@ -39,16 +44,10 @@ public class Document {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public User getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(User createdBy) {
+	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
 	}
 }

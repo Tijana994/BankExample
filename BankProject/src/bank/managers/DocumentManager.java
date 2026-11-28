@@ -11,7 +11,6 @@ import com.security.model.validation.annotations.enums.ParametersObjectsLocation
 import com.security.model.validation.annotations.updaters.UpdateConsentAnnotation;
 
 import bank.models.Document;
-import bank.models.users.User;
 import privacyModel.ConsentFormat;
 import privacyModel.ConsentType;
 import privacyModel.DocumentType;
@@ -19,43 +18,43 @@ import privacyModel.DocumentType;
 public class DocumentManager {
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.CHILD_CUSTODY)
-	public Document createChildCustodyDocument(String documentId, User createdBy, String physicalLocation)
+	public Document createChildCustodyDocument(String documentId, String createdBy, String physicalLocation)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT)
-	public Document createConsentDocument(String documentId, User createdBy, String physicalLocation)
+	public Document createConsentDocument(String documentId, String createdBy, String physicalLocation)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateConsentAnnotation(consentFormat = ConsentFormat.WRITTEN, consentType = ConsentType.EXPLICIT, providedById = "providedBy")
-	public Document createConsentDocument(String documentId, User createdBy, String physicalLocation, String providedBy)
+	public Document createConsentDocument(String documentId, String createdBy, String physicalLocation, String providedBy)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.TRANSFER_CERTIFICATE)
-	public Document createTransferDocument(String documentId, User createdBy, String physicalLocation)
+	public Document createTransferDocument(String documentId, String createdBy, String physicalLocation)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.COURT_APPROVAL)
-	public Document createCourtApproval(String documentId, User createdBy, String physicalLocation)
+	public Document createCourtApproval(String documentId, String createdBy, String physicalLocation)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateDocumentAnnotation(documentType = DocumentType.LEGAL_PROVISION)
-	public Document createLegalProvision(String documentId, User createdBy, String physicalLocation)
+	public Document createLegalProvision(String documentId, String createdBy, String physicalLocation)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}
 	
 	@CreateContractAnnotation(providedById = "providedBy")
-	public Document createContractDocument(String documentId, User createdBy, String physicalLocation, String providedBy)
+	public Document createContractDocument(String documentId, String createdBy, String physicalLocation, String providedBy)
 	{
 		return new Document(documentId, physicalLocation, Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), createdBy);
 	}

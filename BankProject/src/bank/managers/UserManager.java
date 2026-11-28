@@ -30,6 +30,12 @@ public class UserManager {
 		return new Client(username);
 	}
 	
+	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, isLegalAge = true)
+	public Client createClient(String firstName, String lastName, String username, java.util.Date dateOfBirth)
+	{
+		return new Client(firstName, lastName, username, dateOfBirth);
+	}
+	
 	@CreatePrincipalAnnotation(scope = PrincipalScope.OUT, type = PrincipalType.NATURAL_PERSON, shouldSetBirthday = true)
 	public MinorClient createMinorClient(String username, LocalDate birthday, List<User> responsiblePersons)
 	{

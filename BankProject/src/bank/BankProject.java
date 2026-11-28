@@ -52,7 +52,7 @@ public class BankProject {
 		//1.1
 		var eve = bankProject.bank.getUserManager().createClient("Eve");
 		
-		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve, "Novi Sad 1", eve.getUsername());
+		var consent = bankProject.bank.getDocumentManager().createConsentDocument("Eve consent", eve.getUsername(), "Novi Sad 1", eve.getUsername());
 		var account = new Account(ned, eve.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPersonalPurpose, consent.getDocumentId(), "Open account for " + eve.getUsername());
 		bankProject.bank.getAccountManager().openAccount(account);
@@ -62,7 +62,7 @@ public class BankProject {
 				defaultPurpose);
 		
 		//1.3
-		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Transfer consent Eve", eve, "system");
+		var transferDocument = bankProject.bank.getDocumentManager().createTransferDocument("Transfer consent Eve", eve.getUsername(), "system");
 		var from = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var to = java.util.Date.from(LocalDate.of(2034, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
@@ -81,10 +81,10 @@ public class BankProject {
 		var john = bankProject.bank.getUserManager().createClient("John");
 		var alice = bankProject.bank.getUserManager().createMinorClient("Alice", LocalDate.of(2010, 4, 10), 
 				new ArrayList<User>(Arrays.asList(john)));
-		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john, "Novi Sad 1");
+		var consent1 = bankProject.bank.getDocumentManager().createConsentDocument("Alice consent", john.getUsername(), "Novi Sad 1");
 		//consent1.setEndDate(Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)));
 		//bankProject.bank.getDocumentManager().updateConsent(consent1);
-		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john, "System");
+		var childCustody = bankProject.bank.getDocumentManager().createChildCustodyDocument("John-Alice child custody", john.getUsername(), "System");
 		bankProject.bank.getAccountManager().openAccountChild(ned, alice.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent1.getDocumentId(), childCustody.getDocumentId());
 		
@@ -116,7 +116,7 @@ public class BankProject {
 		var marketingPurpose = DataFactory.createPurpose("test", ProcessingReason.MARKETING, ProcessingReasonSubtype.NONE);
 		var personalPurpose = DataFactory.createPurpose(null, ProcessingReason.OUT_OF_SCOPE, ProcessingReasonSubtype.PERSONAL_ACTIVITY);
 		personalPurpose.getSubPurposes().add(marketingPurpose);
-		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john, "Novi Sad 1");
+		var consent2 = bankProject.bank.getDocumentManager().createConsentDocument("John consent", john.getUsername(), "Novi Sad 1");
 		var johnAccount = bankProject.bank.getAccountManager().openAccount(ned, john.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				personalPurpose, consent2.getDocumentId());
 		
@@ -172,14 +172,14 @@ public class BankProject {
 		//4.1
 		var bob = bankProject.bank.getUserManager().createClient("Bob");
 		
-		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob, "Novi Sad 1");
+		var consent3 = bankProject.bank.getDocumentManager().createConsentDocument("Bob consent", bob.getUsername(), "Novi Sad 1");
 		bankProject.bank.getAccountManager().openAccount(patti, bob.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				defaultPurpose, consent3.getDocumentId());
 		
 		//4.2
 		var police = bankProject.bank.getUserManager().createLegalEntityOut("Police");
 		var court = bankProject.bank.getUserManager().createLegalEntityOut("Budapest court");
-		var courtApproval = bankProject.bank.getDocumentManager().createCourtApproval("Police investigation approval - Bob", court, "-");
+		var courtApproval = bankProject.bank.getDocumentManager().createCourtApproval("Police investigation approval - Bob", court.getUsername(), "-");
 		var from1 = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC));
 		var to1 = java.util.Date.from(LocalDate.of(2030, 4, 25).atStartOfDay()
 			      .atZone(ZoneId.systemDefault())
@@ -194,7 +194,7 @@ public class BankProject {
 		//5.1 creditworthiness assessment based on a legal obligation, with data obtained from a credit bureau
 		var carol = bankProject.bank.getUserManager().createClient("Carol");
 		var parliament = bankProject.bank.getUserManager().createLegalEntityOut("Hungarian Parliament");
-		var creditLaw = bankProject.bank.getDocumentManager().createLegalProvision("Consumer credit act - creditworthiness assessment", parliament, "Hungary");
+		var creditLaw = bankProject.bank.getDocumentManager().createLegalProvision("Consumer credit act - creditworthiness assessment", parliament.getUsername(), "Hungary");
 		var creditCheckPurpose = DataFactory.createPurpose("Creditworthiness assessment", ProcessingReason.LEGAL_OBLIGATION, ProcessingReasonSubtype.NONE);
 		var creditCheck = bankProject.bank.getAccountManager().creditCheck(ned, carol.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				creditCheckPurpose, new ArrayList<String>(Arrays.asList(creditLaw.getDocumentId())));
@@ -202,7 +202,7 @@ public class BankProject {
 				creditCheck.getLogId(), carol, bankUser);
 		
 		//5.2 loan granted on the basis of a contract with the data subject
-		var loanContract = bankProject.bank.getDocumentManager().createContractDocument("Loan contract - Carol", carol, "Budapest", carol.getUsername());
+		var loanContract = bankProject.bank.getDocumentManager().createContractDocument("Loan contract - Carol", carol.getUsername(), "Budapest", carol.getUsername());
 		var loanPurpose = DataFactory.createPurpose("Loan agreement", ProcessingReason.CONTRACT_PERFORMANCE, ProcessingReasonSubtype.NONE);
 		bankProject.bank.getAccountManager().grantLoan(ned, carol.getUsername(), bankUser.getUsername(), Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)), 
 				loanPurpose, loanContract.getDocumentId());

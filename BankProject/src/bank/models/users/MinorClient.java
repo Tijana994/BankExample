@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "birthday", responsiblePersons = "responsiblePersons")
+@PrincipalAnnotation(id = "username", birthday = "dateOfBirth", responsiblePersons = "responsiblePersons")
 public class MinorClient extends Client {
 
 	public MinorClient(String username, Date birthday, List<User> responsiblePersons) {

@@ -4,21 +4,38 @@ import java.util.Date;
 
 import com.security.model.validation.annotations.PrincipalAnnotation;
 
-@PrincipalAnnotation(id = "username", birthday = "birthday")
+@PrincipalAnnotation(id = "username", birthday = "dateOfBirth")
 public class Client extends User {
 	
-	private Date birthday;
+	private String firstName;
+	private String lastName;
+	private Date dateOfBirth;
 	
 	public Client(String username) {
 		super(username);
 	}
 
-	public Client(String username, Date birthday) {
+	public Client(String username, Date dateOfBirth) {
 		super(username);
-		this.birthday = birthday;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public Client(String firstName, String lastName, String username, Date dateOfBirth) {
+		super(username);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
 	}
 
 	public Date getBirthday() {
-		return birthday;
+		return dateOfBirth;
 	}
 }
