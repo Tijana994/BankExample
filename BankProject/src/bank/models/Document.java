@@ -7,8 +7,9 @@ import com.security.model.validation.annotations.PaperAnnotation;
 @PaperAnnotation(id="documentId", startDate="startDate", location="physicalLocation", description="description", providedById="createdBy")
 public class Document {
 
-	public Document(String documentId, String physicalLocation, Date startDate, String createdBy) {
+	public Document(String documentId, String description, String physicalLocation, Date startDate, String createdBy) {
 		this.documentId = documentId;
+		this.description = description;
 		this.physicalLocation = physicalLocation;
 		this.startDate = startDate;
 		this.createdBy = createdBy;
@@ -18,7 +19,7 @@ public class Document {
 	private String description;
 	private String physicalLocation;
 	private Date startDate;
-
+	private Date endDate;
 	private String createdBy;
 	public String getDocumentId() {
 		return documentId;
@@ -49,5 +50,11 @@ public class Document {
 	}
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }
